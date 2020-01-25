@@ -1,0 +1,81 @@
+* SQLite
+  #+PROPERTY: header-args:sqlite :db week_2.sqlite :dir db/
+
+  Create table
+  #+begin_src sqlite
+  CREATE TABLE hello_worlds(
+  hello VARCHAR(10),
+  world VARCHAR(10),
+  language VARCHAR(10));
+  #+end_src
+
+  #+RESULTS:
+
+  Insert data
+  #+begin_src sqlite
+    INSERT INTO hello_worlds VALUES
+    ('hello', 'world', 'English'),
+    ('ahoj', 'svet', 'Slovak'),
+    ('holla', 'mundo', 'Spanish'),
+    ("kon'nichiwa", 'sekai', 'Japanese'),
+    ('olá', 'mundo', 'Portuguese'),
+    ('hello', 'world', 'English'),
+    ('ciao', null, 'Italian')
+    ;
+  #+end_src
+
+  #+RESULTS:
+
+  Retrieve data
+  #+begin_src sqlite
+  SELECT * FROM hello_worlds;
+  #+end_src
+
+  #+RESULTS:
+  | hello       | world | English    |
+  | ahoj        | svet  | Slovak     |
+  | holla       | mundo | Spanish    |
+  | kon'nichiwa | sekai | Japanese   |
+  | olá         | mundo | Portuguese |
+  | hello       | world | English    |
+  | ciao        |       | Italian    |
+
+  #+begin_src sqlite
+  SELECT hello || ' ' || world || '!'  FROM hello_worlds;
+  #+end_src
+
+  #+RESULTS:
+  | hello world!       |
+  | ahoj svet!         |
+  | holla mundo!       |
+  | kon'nichiwa sekai! |
+  | olá mundo!         |
+  | hello world!       |
+
+  Cleanup data
+  #+begin_src sqlite
+  drop table hello_worlds;
+  #+end_src
+
+  #+RESULTS:
+
+
+  #+begin_src sqlite
+  delete from hello_worlds;
+  #+end_src
+
+  #+RESULTS:
+
+    #+begin_src sqlite
+    SELECT (hello || ' ' || world || '!') AS greetings FROM hello_worlds;
+    #+end_src
+
+    #+RESULTS:
+    | greetings          |
+    |--------------------|
+    | hello world!       |
+    | ahoj svet!         |
+    | holla mundo!       |
+    | kon'nichiwa sekai! |
+    | olá mundo!         |
+    | hello world!       |

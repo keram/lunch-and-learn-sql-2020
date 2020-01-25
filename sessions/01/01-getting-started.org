@@ -1,0 +1,187 @@
+#+TITLE: Getting Started with SQL
+#+SETUPFILE: ../../theme-bigblow-local.setup
+#+OPTIONS: toc:2
+#+OPTIONS: ^:nil
+#+PROPERTY: header-args:sqlite :db hello_world.sqlite :dir db/ :colnames yes :exports code
+#+INCLUDE: ../../code.inc
+#+CALL: init()
+
+[[./../../index.org][Lunch And Learn SQL in 2020]]
+
+* Getting Started
+
+** Motivation to learn SQL
+
+   - Learn something new
+   - Easy to learn
+   - Useful skill
+   - Enhance your career
+   - Be able to get answers by yourself
+
+** Just enough theory
+*** The Relational Model
+    Mathematical model based on set theory for working with data.
+
+    Terms: Relation, Entity, Attribute, Tuple
+    # **** Relation
+    #      A relation is a set of columns and rows collected in a table-like structure that represents a single entity made up of related data.
+    # **** Entity
+    #      An entity is a person, place, thing, event, or concept about which data is collected, such as a recording artist, a book, or a sales transaction
+    # **** Attribute
+    #      An attribute is a unit fact that describes or characterizes an entity in some way
+    # **** Tuple (record)
+    #      A tuple is a set of data whose values make up an instance of each attribute defined for that relation.
+    #      Each tuple represents a record of related data. (In fact, the set of data is sometimes referred to as a record.)
+*** SQL (Structured Query Language)
+
+    Practical implementation of relational model.
+    Language to communicate with database.
+    Terms: table, row, column
+
+*** RDBMS
+
+    Relational Database Management System.
+
+    Example: MariaDB, PostgreSQL, Microsoft SQL Server, MySQL, SQLite
+
+*** Database
+
+    a collection of data stored in some organized fashion.
+
+    Example: We store data about shifts, workers and employers in database and use PostgreSQL as our management system.
+
+*** Relationships
+
+    - One-to-one:
+      Worker has one Address.
+    - One-to-many:
+      Employer has many workers.
+    - Many-to-many:
+      Worker has many shifts and shift has many workers.
+
+*** Syntax
+
+   Data types:
+
+**** Text
+
+     Enclosed in quotes 'Single' or "Double"
+
+**** Numbers
+
+**** Blob (images, files, ..)
+
+**** Each command is ended with semicolon ;
+
+**** Boolean (true, false or 1 and 0), Date and Time
+
+**** Null
+     Unknown or missing data
+
+** Setup and Installation
+
+*** SQLite
+
+    Why SQLite:
+
+    - Zero Configuration
+    - Portability
+    - Simplicity
+    - Open and Free
+
+*** PostgreSQL
+
+    Why PostgreSQL:
+
+    - OpenSource
+    - Scalability
+    - Security
+    - Extensions
+
+
+** First Queries
+
+   #+begin_src cmd :tangle no
+sqlite3 db/hello_world.sqlite
+   #+end_src
+
+   # Is required by law to print out "hello world!" as first touch
+   # with any programming language.
+
+   We enclose texts in single or double quotes.
+
+   #+begin_src sqlite :colnames no :tangle sql/01/01-hello-world.sql
+   SELECT 'Hello World!';
+   #+end_src
+
+   We separate returned columns by comma *,*.
+   #+begin_src sqlite :colnames no :tangle sql/01/01-hello-world-2.sql
+   SELECT 'Hello', 'World!';
+   #+end_src
+
+   We can give a name (alias) to returned column.
+   #+begin_src sqlite :tangle sql/01/01-hello-world-3.sql
+   SELECT 'Hello World!' AS greeting;
+   #+end_src
+
+   We can join multiple texts together using **||**.
+   #+begin_src sqlite :colnames no :tangle sql/01/01-hello-world-4.sql
+   SELECT 'Hello' || ' ' || 'World!';
+   #+end_src
+
+   We can also work with numbers.
+   #+begin_src sqlite  :tangle sql/01/01-numbers.sql
+   SELECT 5 + 3;
+   #+end_src
+
+   And do various arithmetic operations.
+   #+begin_src sqlite :tangle sql/01/01-numbers-2.sql
+   SELECT
+   5 + 3,
+   eight * five,
+   five = eight,
+   five = 4 + 1,
+   2 as two
+   FROM (SELECT 8 AS eight, 5 AS five);
+   #+end_src
+
+   But most of the time we work with tables.
+   #+begin_src sqlite :tangle sql/01/01-hello-world-5.sql
+   SELECT * FROM hello_worlds;
+   #+end_src
+
+   And want distinct (unique) rows.
+   #+begin_src sqlite :tangle sql/01/01-hello-world-6.sql
+   SELECT DISTINCT * from hello_worlds;
+   #+end_src
+
+   Sneak peak for second lesson.
+
+   #+begin_src sqlite :tangle sql/01/01-hello-world-7.sql
+   SELECT COUNT(*) from hello_worlds;
+   #+end_src
+
+   #+begin_src sqlite :tangle sql/01/01-hello-world-8.sql
+   SELECT COUNT(DISTINCT language) from hello_worlds;
+   #+end_src
+
+** Exercice
+*** What is:
+    - DDL:
+    - DQL:
+    - DML:
+*** Give one example of each type of relationships
+    - one to one
+    - one to many
+    - many to many
+*** Return list of all languages in ~hello_worlds~ table.
+*** Return text "hello world!" in each language from ~hello_worlds~ table.
+    (Hint: Use *||*).
+
+** Further reading
+
+   - https://www.sqlitetutorial.net/sqlite-string-functions/ SQLite text functions
+   - https://en.wikipedia.org/wiki/Edgar_F._Codd "Father of SQL"
+   - https://en.wikipedia.org/wiki/Relational_model *
+
+  ~*~ for enthusiasts

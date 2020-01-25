@@ -1,0 +1,101 @@
+#+SETUPFILE: c:\Users\marek\tools\org-html-themes\setup\theme-bigblow-local.setup
+#+OPTIONS: toc:2
+#+OPTIONS: ^:nil
+#+PROPERTY: header-args:sqlite :db hello_world.sqlite :dir db/ :colnames yes :exports code
+#+bind: org-export-publishing-directory "./export"
+#+TITLE: SELECT our everyday - part one
+
+* SELECT our everyday - part one
+** Refresher
+   #+PROPERTY: header-args:sqlite :db hello_world.sqlite :dir db/ :colnames yes
+
+   #+begin_src sqlite
+   SELECT world, hello from hello_worlds;
+   #+end_src
+
+   #+RESULTS:
+   | world | hello       |
+   |-------+-------------|
+   | world | hello       |
+   | svet  | ahoj        |
+   | mundo | holla       |
+   | sekai | kon'nichiwa |
+   | mundo | olá         |
+   | world | hello       |
+   |       | ciao        |
+
+   #+begin_src sqlite
+   SELECT DISTINCT hello from hello_worlds;
+   #+end_src
+
+   #+RESULTS:
+   | hello       |
+   |-------------|
+   | hello       |
+   | ahoj        |
+   | holla       |
+   | kon'nichiwa |
+   | olá         |
+   | ciao        |
+
+
+   #+begin_src sqlite
+   SELECT COUNT(DISTINCT language) AS 'Number of languages' FROM hello_worlds;
+   #+end_src
+
+   #+RESULTS:
+   | Number of languages |
+   |---------------------|
+   |                   6 |
+
+** Theory
+
+#+begin_example
+SELECT [ DISTINCT | ALL ] { * | <select list> }
+[ FROM <table reference> [ { , <table reference> } . . . ] ]
+[ WHERE <search condition> ]
+[ GROUP BY <grouping specification> ]
+[ HAVING <search condition> ]
+[ ORDER BY <order condition> ]
+#+end_example
+
+** Filtering (WHERE)
+
+   #+begin_src sqlite
+   SELECT * FROM hello_worlds WHERE language IS 'Spanish';
+   #+end_src
+
+   #+RESULTS:
+   | hello | world | language |
+   |-------+-------+----------|
+   | holla | mundo | Spanish  |
+
+
+   #+begin_src sqlite
+   SELECT * FROM hello_worlds WHERE language = 'Spanish';
+   #+end_src
+
+   #+RESULTS:
+   | hello | world | language |
+   |-------+-------+----------|
+   | holla | mundo | Spanish  |
+
+   Get languages starting with capital 'S'
+
+   #+begin_src sqlite
+   SELECT language FROM hello_worlds WHERE SUBSTR(language, 1, 1) = 'S';
+   #+end_src
+
+   #+RESULTS:
+   | language |
+   |----------|
+   | Slovak   |
+   | Spanish  |
+
+** Sorting (ORDER BY)
+
+** Grouping (GROUP BY & HAVING)
+
+** Excercise
+
+** Further reading
