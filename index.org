@@ -1,5 +1,5 @@
 #+TITLE: Lunch And Learn SQL in 2020
-#+SETUPFILE: c:\Users\marek\tools\org-html-themes\setup\theme-bigblow-local.setup
+#+SETUPFILE: theme-bigblow-local-root.setup
 #+OPTIONS: toc:nil
 #+OPTIONS: ^:nil
 #+INCLUDE: code.inc
@@ -7,43 +7,45 @@
 
 * Agenda
 
- -  [[./sessions/01/01-getting-started.org][Week 1 Getting Started - Why and How]]
+ - [[./sessions/01/01-getting-started.org][Week 1: Getting Started - Why and How]]
 
    Why is it useful and how you can start, and run your first queries.
 
    [[./export/01.zip][Download]]
 
- -  Week 2 SELECT
+ - [[./sessions/02/02-select.org][Week 2: SELECT]]
 
-   Basic select commands, filters, ordering.
+   Being picky: filter, order and group.
 
- -  Week 3 INSERT, UPDATE and DELETE
+   [[./export/02.zip][Download]]
+
+ - Week 3: INSERT, UPDATE and DELETE
 
    Change is inevitable.
 
- -  Week 4 SELECT part 2
+ - Week 4: SELECT part 2
 
    Joins, grouping and extra filtering.
 
- -  Week 5 DATABASE
+ - Week 5: DATABASE
 
    Creating own data model, decomposition, etc..
 
- -  Week 6 PostgreSQL
+ - Week 6: PostgreSQL
 
    Specific features, postgis, json..
 
- -  Week 7 SYFT data model
+ - Week 7: SYFT data model
 
    Orienting in syft tables.
 
- -  Week 8 SYFT data model 2
+ - Week 8: SYFT data model 2
 
    Getting answers to specific questions over syft dataset.
 
- -  Week 9 SELECT part 3
+ - Week 9: SELECT part 3
 
- -  Week 10 Fun with SQL and beyond
+ - Week 10: Fun with SQL and beyond
 
    Nulls, injections etc.
 

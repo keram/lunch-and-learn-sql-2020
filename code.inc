@@ -2,12 +2,14 @@
 
 #+NAME: init
 #+BEGIN_SRC bash :exports none
-cd ..
-mkdir ../export/
-rm -r ../export/*.zip
-sessions=$(ls -d */)
-for i in $sessions
+# rm -r export/
+mkdir export/
+sessions=$(ls -d sessions/*/)
+root=$(pwd)
+for sdir in $sessions
 do
- zip -r ../export/${i/\//\.}zip $i
+cd $root/$sdir
+# echo $root/export/$(basename $sdir).zip
+zip -rqu $root/export/$(basename $sdir).zip ./
 done
 #+END_SRC
