@@ -1,12 +1,17 @@
-#+SETUPFILE: c:\Users\marek\tools\org-html-themes\setup\theme-bigblow-local.setup
-#+OPTIONS: toc:2
-#+OPTIONS: ^:nil
 #+TITLE: Lunch And Learn SQL in 2020
+#+SETUPFILE: c:\Users\marek\tools\org-html-themes\setup\theme-bigblow-local.setup
+#+OPTIONS: toc:nil
+#+OPTIONS: ^:nil
+#+INCLUDE: code.inc
+#+CALL: init()
 
-* Lunch And Learn SQL in 2020
+* Agenda
+
  -  [[./sessions/01/01-getting-started.org][Week 1 Getting Started - Why and How]]
 
    Why is it useful and how you can start, and run your first queries.
+
+   [[./export/01.zip][Download]]
 
  -  Week 2 SELECT
 
@@ -41,3 +46,7 @@
  -  Week 10 Fun with SQL and beyond
 
    Nulls, injections etc.
+
+* Instructions
+
+TODO

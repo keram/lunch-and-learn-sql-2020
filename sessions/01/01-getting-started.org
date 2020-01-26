@@ -3,8 +3,6 @@
 #+OPTIONS: toc:2
 #+OPTIONS: ^:nil
 #+PROPERTY: header-args:sqlite :db hello_world.sqlite :dir db/ :colnames yes :exports code
-#+INCLUDE: ../../code.inc
-#+CALL: init()
 
 [[./../../index.org][Lunch And Learn SQL in 2020]]
 
