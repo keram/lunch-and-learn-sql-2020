@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-01-25 Sat 17:59 -->
+<!-- 2020-01-26 Sun 19:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SELECT our everyday - part one</title>
+<title>SELECT - part one</title>
 <meta name="generator" content="Org mode" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -192,17 +192,17 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="styles/bigblow/css/htmlize.css"/>
-<link rel="stylesheet" type="text/css" href="styles/bigblow/css/bigblow.css"/>
-<link rel="stylesheet" type="text/css" href="styles/bigblow/css/hideshow.css"/>
-<script type="text/javascript" src="styles/bigblow/js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
-<script type="text/javascript" src="styles/bigblow/js/jquery.localscroll-min.js"></script>
-<script type="text/javascript" src="styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-<script type="text/javascript" src="styles/bigblow/js/jquery.zclip.min.js"></script>
-<script type="text/javascript" src="styles/bigblow/js/bigblow.js"></script>
-<script type="text/javascript" src="styles/bigblow/js/hideshow.js"></script>
-<script type="text/javascript" src="styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../styles/bigblow/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../styles/bigblow/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="../../styles/bigblow/css/hideshow.css"/>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/bigblow.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/hideshow.js"></script>
+<script type="text/javascript" src="../../styles/lib/js/jquery.stickytableheaders.min.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -252,54 +252,46 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">SELECT our everyday - part one</h1>
+<h1 class="title">SELECT - part one</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org6b50647">1. SELECT our everyday - part one</a>
+<li><a href="#org68471eb">SELECT - part one</a>
 <ul>
-<li><a href="#org1e5838c">1.1. Refresher</a></li>
-<li><a href="#org4d7005c">1.2. Theory</a></li>
-<li><a href="#orga7df631">1.3. Filtering (WHERE)</a></li>
-<li><a href="#org7bc85de">1.4. Sorting (ORDER BY)</a></li>
-<li><a href="#org2476dee">1.5. Grouping (GROUP BY &amp; HAVING)</a></li>
-<li><a href="#orgfa06fd6">1.6. Excercise</a></li>
-<li><a href="#org61ea123">1.7. Further reading</a></li>
+<li><a href="#orga3c0531">Theory</a></li>
+<li><a href="#org054b9a4">FROM</a></li>
+<li><a href="#org560ba6d">WHERE</a></li>
+<li><a href="#org7e5eead">ORDER BY</a></li>
+<li><a href="#org1378079">GROUP BY</a></li>
+<li><a href="#org4ba0cda">LIMIT</a></li>
+<li><a href="#org7b05408">Combine</a></li>
+<li><a href="#org336ec16">Excercise</a></li>
+<li><a href="#org688b3ae">Further reading</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
+<p>
+<a href="./../../index.html">Lunch And Learn SQL in 2020</a>
+</p>
 
-<div id="outline-container-org6b50647" class="outline-2">
-<h2 id="org6b50647"><span class="section-number-2">1</span> SELECT our everyday - part one</h2>
-<div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-org1e5838c" class="outline-3">
-<h3 id="org1e5838c"><span class="section-number-3">1.1</span> Refresher</h3>
-<div class="outline-text-3" id="text-1-1">
-<div class="org-src-container">
-<pre class="src src-sqlite"><span style="color: #b4fa70;">SELECT</span> world, hello <span style="color: #b4fa70;">from</span> hello_worlds;
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-sqlite"><span style="color: #b4fa70;">SELECT</span> <span style="color: #b4fa70;">DISTINCT</span> hello <span style="color: #b4fa70;">from</span> hello_worlds;
-</pre>
+<div id="outline-container-org68471eb" class="outline-2">
+<h2 id="org68471eb">SELECT - part one</h2>
+<div class="outline-text-2" id="text-org68471eb">
+<p>
+Being picky: filter, order group and/or limit.
+</p>
 </div>
 
+<div id="outline-container-orga3c0531" class="outline-3">
+<h3 id="orga3c0531">Theory</h3>
+<div class="outline-text-3" id="text-orga3c0531">
+<p>
+DQL (Data Query Language) part of SQL
+</p>
 
-<div class="org-src-container">
-<pre class="src src-sqlite"><span style="color: #b4fa70;">SELECT</span> <span style="color: #e090d7;">COUNT</span>(<span style="color: #b4fa70;">DISTINCT</span> <span style="color: #b4fa70;">language</span>) <span style="color: #b4fa70;">AS</span> <span style="color: #e9b96e;">'Number of languages'</span> <span style="color: #b4fa70;">FROM</span> hello_worlds;
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org4d7005c" class="outline-3">
-<h3 id="org4d7005c"><span class="section-number-3">1.2</span> Theory</h3>
-<div class="outline-text-3" id="text-1-2">
 <pre class="example">
 SELECT [ DISTINCT | ALL ] { * | &lt;select list&gt; }
 [ FROM &lt;table reference&gt; [ { , &lt;table reference&gt; } . . . ] ]
@@ -307,54 +299,196 @@ SELECT [ DISTINCT | ALL ] { * | &lt;select list&gt; }
 [ GROUP BY &lt;grouping specification&gt; ]
 [ HAVING &lt;search condition&gt; ]
 [ ORDER BY &lt;order condition&gt; ]
+[ LIMIT &lt;limit condition&gt; ]
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orga7df631" class="outline-3">
-<h3 id="orga7df631"><span class="section-number-3">1.3</span> Filtering (WHERE)</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-org054b9a4" class="outline-3">
+<h3 id="org054b9a4">FROM</h3>
+<div class="outline-text-3" id="text-org054b9a4">
+<p>
+Get all from hello_worlds table.
+</p>
 <div class="org-src-container">
-<pre class="src src-sqlite"><span style="color: #b4fa70;">SELECT</span> * <span style="color: #b4fa70;">FROM</span> hello_worlds <span style="color: #b4fa70;">WHERE</span> <span style="color: #b4fa70;">language</span> <span style="color: #b4fa70;">IS</span> <span style="color: #e9b96e;">'Spanish'</span>;
-</pre>
-</div>
-
-
-<div class="org-src-container">
-<pre class="src src-sqlite"><span style="color: #b4fa70;">SELECT</span> * <span style="color: #b4fa70;">FROM</span> hello_worlds <span style="color: #b4fa70;">WHERE</span> <span style="color: #b4fa70;">language</span> = <span style="color: #e9b96e;">'Spanish'</span>;
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> hello_worlds;
 </pre>
 </div>
 
 <p>
-Get languages starting with capital 'S'
+Get only rows with world column from hello_worlds table.
 </p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> world <span class="org-keyword">FROM</span> hello_worlds;
+</pre>
+</div>
+
+<p>
+Get only unique rows with world column from hello_worlds table.
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> <span class="org-keyword">DISTINCT</span> world <span class="org-keyword">FROM</span> hello_worlds;
+</pre>
+</div>
+
+<p>
+Querying data from non existing table.
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> foo;
+</pre>
+</div>
+
+<p>
+List of tables in our sqlite database.
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite">.tables
+</pre>
+</div>
 
 <div class="org-src-container">
-<pre class="src src-sqlite"><span style="color: #b4fa70;">SELECT</span> <span style="color: #b4fa70;">language</span> <span style="color: #b4fa70;">FROM</span> hello_worlds <span style="color: #b4fa70;">WHERE</span> SUBSTR(<span style="color: #b4fa70;">language</span>, 1, 1) = <span style="color: #e9b96e;">'S'</span>;
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers;
+</pre>
+</div>
+<p>
+Note: this workers table does not match our production workers table
+</p>
+</div>
+</div>
+
+<div id="outline-container-org560ba6d" class="outline-3">
+<h3 id="org560ba6d">WHERE</h3>
+<div class="outline-text-3" id="text-org560ba6d">
+<p>
+(Workers from GB)
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">WHERE</span> country = <span class="org-string">'GB'</span>;
+</pre>
+</div>
+
+<p>
+OR (Workers from Australia or New Zealand.)
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">WHERE</span> country = <span class="org-string">'AU'</span> <span class="org-keyword">OR</span> country = <span class="org-string">'NZ'</span>;
+</pre>
+</div>
+
+<p>
+AND
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">WHERE</span> verified = <span class="org-keyword">true</span> <span class="org-keyword">AND</span> shifts_worked &gt; 10;
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7bc85de" class="outline-3">
-<h3 id="org7bc85de"><span class="section-number-3">1.4</span> Sorting (ORDER BY)</h3>
+<div id="outline-container-org7e5eead" class="outline-3">
+<h3 id="org7e5eead">ORDER BY</h3>
+<div class="outline-text-3" id="text-org7e5eead">
+<pre class="example">
+ORDER BY column (ASC or DESC)
+</pre>
+
+<p>
+Numbers of workers per country (ascendant by default)
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">ORDER</span> <span class="org-keyword">BY</span> country;
+</pre>
 </div>
 
-<div id="outline-container-org2476dee" class="outline-3">
-<h3 id="org2476dee"><span class="section-number-3">1.5</span> Grouping (GROUP BY &amp; HAVING)</h3>
+<p>
+Descentant
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">ORDER</span> <span class="org-keyword">BY</span> shifts_worked <span class="org-keyword">DESC</span>;
+</pre>
+</div>
+</div>
 </div>
 
-<div id="outline-container-orgfa06fd6" class="outline-3">
-<h3 id="orgfa06fd6"><span class="section-number-3">1.6</span> Excercise</h3>
+<div id="outline-container-org1378079" class="outline-3">
+<h3 id="org1378079">GROUP BY</h3>
+<div class="outline-text-3" id="text-org1378079">
+<p>
+Numbers of workers per country.
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> country, <span class="org-builtin">COUNT</span>(*) <span class="org-keyword">FROM</span> workers <span class="org-keyword">GROUP</span> <span class="org-keyword">BY</span> country;
+</pre>
 </div>
 
-<div id="outline-container-org61ea123" class="outline-3">
-<h3 id="org61ea123"><span class="section-number-3">1.7</span> Further reading</h3>
+<p>
+Shifts worked per country.
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> country, <span class="org-builtin">SUM</span>(shifts_worked) <span class="org-keyword">FROM</span> workers <span class="org-keyword">GROUP</span> <span class="org-keyword">BY</span> country;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4ba0cda" class="outline-3">
+<h3 id="org4ba0cda">LIMIT</h3>
+<div class="outline-text-3" id="text-org4ba0cda">
+<p>
+first five in database
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">LIMIT</span> 5;
+</pre>
+</div>
+
+<p>
+with offset (next ten)
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">LIMIT</span> 5 OFFSET 5;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7b05408" class="outline-3">
+<h3 id="org7b05408">Combine</h3>
+<div class="outline-text-3" id="text-org7b05408">
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers
+<span class="org-keyword">WHERE</span> verified = <span class="org-keyword">true</span> <span class="org-keyword">AND</span> shifts_worked &lt; 10
+<span class="org-keyword">ORDER</span> <span class="org-keyword">BY</span> shifts_worked <span class="org-keyword">DESC</span>
+<span class="org-keyword">LIMIT</span> 3;
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org336ec16" class="outline-3">
+<h3 id="org336ec16">Excercise</h3>
+<div class="outline-text-3" id="text-org336ec16">
+<p>
+Workers with name starting with capital O.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">WHERE</span> SUBSTR(first_name, 1, 1) = <span class="org-string">'O'</span>;
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org688b3ae" class="outline-3">
+<h3 id="org688b3ae">Further reading</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2020-01-25 Sat 17:59</p>
+<p class="date">Created: 2020-01-26 Sun 19:29</p>
 </div>
 </body>
 </html>

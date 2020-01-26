@@ -1,101 +1,374 @@
-#+SETUPFILE: c:\Users\marek\tools\org-html-themes\setup\theme-bigblow-local.setup
-#+OPTIONS: toc:2
+#+TITLE: SELECT - part one
+#+SETUPFILE: ../../theme-bigblow-local.setup
+#+OPTIONS: num:nil
 #+OPTIONS: ^:nil
-#+PROPERTY: header-args:sqlite :db hello_world.sqlite :dir db/ :colnames yes :exports code
-#+bind: org-export-publishing-directory "./export"
-#+TITLE: SELECT our everyday - part one
+#+PROPERTY: header-args:sqlite :db week_2.sqlite :dir db/ :colnames yes :exports code
 
-* SELECT our everyday - part one
-** Refresher
-   #+PROPERTY: header-args:sqlite :db hello_world.sqlite :dir db/ :colnames yes
+[[./../../index.org][Lunch And Learn SQL in 2020]]
 
-   #+begin_src sqlite
-   SELECT world, hello from hello_worlds;
-   #+end_src
+* SELECT - part one
 
-   #+RESULTS:
-   | world | hello       |
-   |-------+-------------|
-   | world | hello       |
-   | svet  | ahoj        |
-   | mundo | holla       |
-   | sekai | kon'nichiwa |
-   | mundo | olá         |
-   | world | hello       |
-   |       | ciao        |
+  Being picky: filter, order group and/or limit.
 
-   #+begin_src sqlite
-   SELECT DISTINCT hello from hello_worlds;
-   #+end_src
+  # ** Refresher
+  #    #+begin_src sqlite
+  #    SELECT world, hello FROM hello_worlds;
+  #    #+end_src
 
-   #+RESULTS:
-   | hello       |
-   |-------------|
-   | hello       |
-   | ahoj        |
-   | holla       |
-   | kon'nichiwa |
-   | olá         |
-   | ciao        |
+  #    #+RESULTS:
+  #    | world | hello       |
+  #    |-------+-------------|
+  #    | world | hello       |
+  #    | svet  | ahoj        |
+  #    | mundo | holla       |
+  #    | sekai | kon'nichiwa |
+  #    | mundo | olá         |
+  #    | world | hello       |
+  #    |       | ciao        |
+
+  #    #+begin_src sqlite
+  #    SELECT DISTINCT hello from hello_worlds;
+  #    #+end_src
+
+  #    #+RESULTS:
+  #    | hello       |
+  #    |-------------|
+  #    | hello       |
+  #    | ahoj        |
+  #    | holla       |
+  #    | kon'nichiwa |
+  #    | olá         |
+  #    | ciao        |
 
 
-   #+begin_src sqlite
-   SELECT COUNT(DISTINCT language) AS 'Number of languages' FROM hello_worlds;
-   #+end_src
+  # #+begin_src sqlite
+  # SELECT COUNT(DISTINCT language) AS 'Number of languages' FROM hello_worlds;
+  # #+end_src
 
-   #+RESULTS:
-   | Number of languages |
-   |---------------------|
-   |                   6 |
+  # #+RESULTS:
+  # | Number of languages |
+  # |---------------------|
+  # |                   6 |
 
 ** Theory
 
-#+begin_example
-SELECT [ DISTINCT | ALL ] { * | <select list> }
-[ FROM <table reference> [ { , <table reference> } . . . ] ]
-[ WHERE <search condition> ]
-[ GROUP BY <grouping specification> ]
-[ HAVING <search condition> ]
-[ ORDER BY <order condition> ]
-#+end_example
+   DQL (Data Query Language) part of SQL
 
-** Filtering (WHERE)
+   #+begin_example
+   SELECT [ DISTINCT | ALL ] { * | <select list> }
+   [ FROM <table reference> [ { , <table reference> } . . . ] ]
+   [ WHERE <search condition> ]
+   [ GROUP BY <grouping specification> ]
+   [ HAVING <search condition> ]
+   [ ORDER BY <order condition> ]
+   [ LIMIT <limit condition> ]
+   #+end_example
 
-   #+begin_src sqlite
-   SELECT * FROM hello_worlds WHERE language IS 'Spanish';
+** FROM
+
+   Get all from hello_worlds table.
+   #+begin_src sqlite :tangle sql/02-select-from-1.sql
+   SELECT * FROM hello_worlds;
    #+end_src
 
    #+RESULTS:
-   | hello | world | language |
-   |-------+-------+----------|
-   | holla | mundo | Spanish  |
 
-
-   #+begin_src sqlite
-   SELECT * FROM hello_worlds WHERE language = 'Spanish';
+   Get only rows with world column from hello_worlds table.
+   #+begin_src sqlite :tangle sql/02-select-from-2.sql
+   SELECT world FROM hello_worlds;
    #+end_src
 
    #+RESULTS:
-   | hello | world | language |
-   |-------+-------+----------|
-   | holla | mundo | Spanish  |
+   | world |
+   |-------|
+   | world |
+   | svet  |
+   | mundo |
+   | sekai |
+   | mundo |
+   | world |
 
-   Get languages starting with capital 'S'
-
-   #+begin_src sqlite
-   SELECT language FROM hello_worlds WHERE SUBSTR(language, 1, 1) = 'S';
+   Get only unique rows with world column from hello_worlds table.
+   #+begin_src sqlite :tangle sql/02-select-from-3.sql
+   SELECT DISTINCT world FROM hello_worlds;
    #+end_src
 
    #+RESULTS:
-   | language |
-   |----------|
-   | Slovak   |
-   | Spanish  |
+   | world |
+   |-------|
+   | world |
+   | svet  |
+   | mundo |
+   | sekai |
 
-** Sorting (ORDER BY)
+   Querying data from non existing table.
+   #+begin_src sqlite :tangle sql/02-select-from-4.sql :exports code
+   SELECT * FROM foo;
+   #+end_src
 
-** Grouping (GROUP BY & HAVING)
+   List of tables in our sqlite database.
+   #+begin_src sqlite :tangle sql/02-select-from-5.sql
+   .tables
+   #+end_src
+
+   #+RESULTS:
+   | hello_worlds  workers |
+   |-----------------------|
+
+   #+begin_src sqlite :tangle sql/02-select-from-6.sql
+   SELECT * FROM workers;
+   #+end_src
+   Note: this workers table does not match our production workers table
+
+** WHERE
+   # *** hello world version
+
+   #    Rows where world equals to `mundo`.
+   #    #+begin_src sqlite :tangle sql/02-select.sql
+   #    SELECT * FROM hello_worlds WHERE world = 'mundo';
+   #    #+end_src
+
+   #    #+RESULTS:
+   #    | hello | world | language   |
+   #    |-------+-------+------------|
+   #    | holla | mundo | Spanish    |
+   #    | olá   | mundo | Portuguese |
+
+   #    Rows where world equals to `mundo` or `svet`.
+   #    #+begin_src sqlite :tangle sql/02-select.sql
+   #    SELECT * FROM hello_worlds WHERE world = 'mundo' OR world = 'svet';
+   #    #+end_src
+
+   #    #+RESULTS:
+   #    | hello | world | language   |
+   #    |-------+-------+------------|
+   #    | ahoj  | svet  | Slovak     |
+   #    | holla | mundo | Spanish    |
+   #    | olá   | mundo | Portuguese |
+
+   #    Rows where world equals to `mundo` and language equals to `Spanish`.
+   #    #+begin_src sqlite :tangle sql/02-select.sql
+   #    SELECT * FROM hello_worlds WHERE world = 'mundo' AND language = 'Spanish';
+   #    #+end_src
+
+   #    Rows where language starts with capital S.
+   #    #+begin_src sqlite :tangle sql/02-select.sql
+   #    SELECT * FROM hello_worlds WHERE SUBSTR(language, 1, 1) = 'S';
+   #    #+end_src
+
+   #    #+RESULTS:
+   #    | hello | world | language |
+   #    |-------+-------+----------|
+   #    | ahoj  | svet  | Slovak   |
+   #    | holla | mundo | Spanish  |
+
+   (Workers from GB)
+   #+begin_src sqlite :tangle sql/02-select-where-1.sql
+   SELECT * FROM workers WHERE country = 'GB';
+   #+end_src
+
+   #+RESULTS:
+   | first_name | last_name  | telephone             | email                  | country | postcode | verified | shifts_worker |
+   |------------+------------+-----------------------+------------------------+---------+----------+----------+---------------|
+   | Emily      | Nolan      | 112-723-3906 x35944   | emily@yahoo.com        | GB      | LS25 3AX |        1 |             1 |
+   | Olivia     | Bayer      | 539.597.3784 x971     | olivia.bayer@yahoo.com | GB      | LS25 3AX |        1 |            17 |
+   | Amelia     | Ziemann    | 439.776.0760 x16370   | amelia@live.com        | GB      | TF1 1JA  |        1 |            42 |
+   | Harry      | Weissnat   | 287.861.7897 x723     | harry@gmail.com        | GB      | SE18 6EY |        0 |            20 |
+   | Lucy       | Lueilwitz  | (972) 434-9145        | lucy@yahoo.com         | GB      | SE18 6EY |        1 |            18 |
+   | Amelia     | Mertz      | (949) 299-5810 x72377 | amelia@gmail.com       | GB      | SE8 5PA  |        1 |            10 |
+   | Olivia     | Kling      | 592-680-6368 x47550   | olivia@gmail.com       | GB      | TF1 1JA  |        1 |            15 |
+   | Oliver     | Cronin     | 1-450-883-3600 x67866 | oliver@gmail.com       | GB      | SE5 9JW  |        1 |            23 |
+   | Olivia     | Morissette | 818-814-6348 x669     | olivia@yahoo.com       | GB      | W1 9SD   |        1 |             1 |
+
+   OR (Workers from Australia or New Zealand.)
+   #+begin_src sqlite :tangle sql/02-select-where-2.sql
+   SELECT * FROM workers WHERE country = 'AU' OR country = 'NZ';
+   #+end_src
+
+   #+RESULTS:
+   | first_name | last_name | telephone            | email                 | country | postcode | verified | shifts_worker |
+   |------------+-----------+----------------------+-----------------------+---------+----------+----------+---------------|
+   | Oliver     | Huel      | 231-680-6707 x3907   | oliver@yahoo.com      | NZ      | SE8 5PA  |        1 |            11 |
+   | Emily      | Stamm     | 1-442-456-4126 x6543 | emily@gmail.com       | AU      | LS25 3AX |        1 |            30 |
+   | Lucy       | Hintz     | 728.939.5077         | lucy.hintz@yahoo.com  | NZ      | LS25 3AX |        1 |             2 |
+   | George     | Pouros    | 1-546-234-2587 x3500 | george@gmail.com      | AU      | W1 9SD   |        1 |            12 |
+   | Charlotte  | Roob      | 651-713-8277 x371    | charlotte@hotmail.com | AU      | SE8 5PA  |        1 |            40 |
+
+   AND
+   #+begin_src sqlite :tangle sql/02-select-where-3.sql
+   SELECT * FROM workers WHERE verified = true AND shifts_worked > 10;
+   #+end_src
+
+   #+RESULTS:
+   | first_name | last_name | telephone             | email                  | country | postcode | verified | shifts_worked |
+   |------------+-----------+-----------------------+------------------------+---------+----------+----------+---------------|
+   | Oliver     | Frami     | 123-049-9312 x75410   | oliver@hotmail.com     | US      | LS25 3AX |        1 |            87 |
+   | Oliver     | Huel      | 231-680-6707 x3907    | oliver@yahoo.com       | NZ      | SE8 5PA  |        1 |            11 |
+   | Olivia     | Bayer     | 539.597.3784 x971     | olivia.bayer@yahoo.com | GB      | LS25 3AX |        1 |            17 |
+   | Amelia     | Ziemann   | 439.776.0760 x16370   | amelia@live.com        | GB      | TF1 1JA  |        1 |            42 |
+   | Emily      | Stamm     | 1-442-456-4126 x6543  | emily@gmail.com        | AU      | LS25 3AX |        1 |            17 |
+   | Lucy       | Lueilwitz | (972) 434-9145        | lucy@yahoo.com         | GB      | SE18 6EY |        1 |            18 |
+   | George     | Pouros    | 1-546-234-2587 x3500  | george@gmail.com       | AU      | W1 9SD   |        1 |            12 |
+   | Oliver     | Cronin    | 1-450-883-3600 x67866 | oliver@gmail.com       | GB      | SE5 9JW  |        1 |            23 |
+
+** ORDER BY
+
+   #+begin_example
+   ORDER BY column (ASC or DESC)
+   #+end_example
+
+   Numbers of workers per country (ascendant by default)
+   #+begin_src sqlite :tangle sql/02-select-order-1.sql
+   SELECT * FROM workers ORDER BY country;
+   #+end_src
+
+   #+RESULTS:
+   | first_name | last_name  | telephone             | email                  | country | postcode | verified | shifts_worked |
+   |------------+------------+-----------------------+------------------------+---------+----------+----------+---------------|
+   | Emily      | Stamm      | 1-442-456-4126 x6543  | emily@gmail.com        | AU      | LS25 3AX |        1 |            17 |
+   | George     | Pouros     | 1-546-234-2587 x3500  | george@gmail.com       | AU      | W1 9SD   |        1 |            12 |
+   | Charlotte  | Roob       | 651-713-8277 x371     | charlotte@hotmail.com  | AU      | SE8 5PA  |        1 |             3 |
+   | Jessica    | Romaguera  | (150) 964-5686 x2614  | jessica@yahoo.com      | FR      | SE8 5PA  |        0 |             0 |
+   | Emily      | Nolan      | 112-723-3906 x35944   | emily@yahoo.com        | GB      | LS25 3AX |        1 |             1 |
+   | Olivia     | Bayer      | 539.597.3784 x971     | olivia.bayer@yahoo.com | GB      | LS25 3AX |        1 |            17 |
+   | Amelia     | Ziemann    | 439.776.0760 x16370   | amelia@live.com        | GB      | TF1 1JA  |        1 |            42 |
+   | Harry      | Weissnat   | 287.861.7897 x723     | harry@gmail.com        | GB      | SE18 6EY |        0 |            20 |
+   | Lucy       | Lueilwitz  | (972) 434-9145        | lucy@yahoo.com         | GB      | SE18 6EY |        1 |            18 |
+   | Amelia     | Mertz      | (949) 299-5810 x72377 | amelia@gmail.com       | GB      | SE8 5PA  |        1 |            10 |
+   | Olivia     | Kling      | 592-680-6368 x47550   | olivia@gmail.com       | GB      | TF1 1JA  |        0 |            15 |
+   | Oliver     | Cronin     | 1-450-883-3600 x67866 | oliver@gmail.com       | GB      | SE5 9JW  |        1 |            23 |
+   | Olivia     | Morissette | 818-814-6348 x669     | olivia@yahoo.com       | GB      | W1 9SD   |        1 |             1 |
+   | Oliver     | Huel       | 231-680-6707 x3907    | oliver@yahoo.com       | NZ      | SE8 5PA  |        1 |            11 |
+   | Lucy       | Hintz      | 728.939.5077          | lucy.hintz@yahoo.com   | NZ      | LS25 3AX |        1 |             2 |
+   | Charlotte  | Crona      | (358) 543-3871 x11661 | charlotte@gmail.com    | US      | LS25 3AX |        1 |             7 |
+   | Oliver     | Frami      | 123-049-9312 x75410   | oliver@hotmail.com     | US      | LS25 3AX |        1 |            87 |
+   | George     | Miller     | 1-829-690-4711 x64244 | george@outlook.com     | US      | LS25 3AX |        1 |             5 |
+   | Oliver     | Kuhic      | 798-471-9536 x56285   | oliver.kuhic@gmail.com | US      | TF1 1JA  |        0 |             8 |
+   | Jessica    | Berge      | (923) 444-5956 x64054 | jessica@gmail.com      | US      | TF1 1JA  |        1 |             4 |
+
+   Descentant
+   #+begin_src sqlite :tangle sql/02-select-order-2.sql
+   SELECT * FROM workers ORDER BY shifts_worked DESC;
+   #+end_src
+
+   #+RESULTS:
+   | first_name | last_name  | telephone             | email                  | country | postcode | verified | shifts_worked |
+   |------------+------------+-----------------------+------------------------+---------+----------+----------+---------------|
+   | Oliver     | Frami      | 123-049-9312 x75410   | oliver@hotmail.com     | US      | LS25 3AX |        1 |            87 |
+   | Amelia     | Ziemann    | 439.776.0760 x16370   | amelia@live.com        | GB      | TF1 1JA  |        1 |            42 |
+   | Oliver     | Cronin     | 1-450-883-3600 x67866 | oliver@gmail.com       | GB      | SE5 9JW  |        1 |            23 |
+   | Harry      | Weissnat   | 287.861.7897 x723     | harry@gmail.com        | GB      | SE18 6EY |        0 |            20 |
+   | Lucy       | Lueilwitz  | (972) 434-9145        | lucy@yahoo.com         | GB      | SE18 6EY |        1 |            18 |
+   | Emily      | Stamm      | 1-442-456-4126 x6543  | emily@gmail.com        | AU      | LS25 3AX |        1 |            17 |
+   | George     | Pouros     | 1-546-234-2587 x3500  | george@gmail.com       | AU      | W1 9SD   |        1 |            12 |
+   | Oliver     | Huel       | 231-680-6707 x3907    | oliver@yahoo.com       | NZ      | SE8 5PA  |        1 |            11 |
+   | Amelia     | Mertz      | (949) 299-5810 x72377 | amelia@gmail.com       | GB      | SE8 5PA  |        1 |            10 |
+   | Oliver     | Kuhic      | 798-471-9536 x56285   | oliver.kuhic@gmail.com | US      | TF1 1JA  |        0 |             8 |
+   | Charlotte  | Crona      | (358) 543-3871 x11661 | charlotte@gmail.com    | US      | LS25 3AX |        1 |             7 |
+   | George     | Miller     | 1-829-690-4711 x64244 | george@outlook.com     | US      | LS25 3AX |        1 |             5 |
+   | Jessica    | Berge      | (923) 444-5956 x64054 | jessica@gmail.com      | US      | TF1 1JA  |        1 |             4 |
+   | Olivia     | Kling      | 592-680-6368 x47550   | olivia@gmail.com       | GB      | TF1 1JA  |        0 |             3 |
+   | Charlotte  | Roob       | 651-713-8277 x371     | charlotte@hotmail.com  | AU      | SE8 5PA  |        1 |             3 |
+   | Lucy       | Hintz      | 728.939.5077          | lucy.hintz@yahoo.com   | NZ      | LS25 3AX |        1 |             2 |
+   | Emily      | Nolan      | 112-723-3906 x35944   | emily@yahoo.com        | GB      | LS25 3AX |        1 |             1 |
+   | Olivia     | Bayer      | 539.597.3784 x971     | olivia.bayer@yahoo.com | GB      | LS25 3AX |        1 |             1 |
+   | Olivia     | Morissette | 818-814-6348 x669     | olivia@yahoo.com       | GB      | W1 9SD   |        1 |             1 |
+   | Jessica    | Romaguera  | (150) 964-5686 x2614  | jessica@yahoo.com      | FR      | SE8 5PA  |        0 |             0 |
+
+** GROUP BY
+
+   Numbers of workers per country.
+   #+begin_src sqlite :tangle sql/02-select-group-1.sql
+   SELECT country, COUNT(*) FROM workers GROUP BY country;
+   #+end_src
+
+   #+RESULTS:
+   | country | count(*) |
+   |---------+----------|
+   | AU      |        3 |
+   | FR      |        1 |
+   | GB      |        9 |
+   | NZ      |        2 |
+   | US      |        5 |
+
+   Shifts worked per country.
+   #+begin_src sqlite :tangle sql/02-select-group-2.sql
+   SELECT country, SUM(shifts_worked) FROM workers GROUP BY country;
+   #+end_src
+
+   #+RESULTS:
+   | country | sum(shifts_worked) |
+   |---------+--------------------|
+   | AU      |                 32 |
+   | FR      |                  0 |
+   | GB      |                119 |
+   | NZ      |                 13 |
+   | US      |                111 |
+
+** LIMIT
+   first five in database
+   #+begin_src sqlite :tangle sql/02-select-limit-1.sql
+   SELECT * FROM workers LIMIT 5;
+   #+end_src
+
+   #+RESULTS:
+   | first_name | last_name | telephone             | email               | country | postcode | verified | shifts_worked |
+   |------------+-----------+-----------------------+---------------------+---------+----------+----------+---------------|
+   | Charlotte  | Crona     | (358) 543-3871 x11661 | charlotte@gmail.com | US      | LS25 3AX |        1 |             7 |
+   | Oliver     | Frami     | 123-049-9312 x75410   | oliver@hotmail.com  | US      | LS25 3AX |        1 |            87 |
+   | George     | Miller    | 1-829-690-4711 x64244 | george@outlook.com  | US      | LS25 3AX |        1 |             5 |
+   | Emily      | Nolan     | 112-723-3906 x35944   | emily@yahoo.com     | GB      | LS25 3AX |        1 |             1 |
+   | Oliver     | Huel      | 231-680-6707 x3907    | oliver@yahoo.com    | NZ      | SE8 5PA  |        1 |            11 |
+
+   with offset (next ten)
+   #+begin_src sqlite :tangle sql/02-select-limit-2.sql
+   SELECT * FROM workers LIMIT 5 OFFSET 5;
+   #+end_src
+
+   #+RESULTS:
+   | first_name | last_name | telephone            | email                  | country | postcode | verified | shifts_worked |
+   |------------+-----------+----------------------+------------------------+---------+----------+----------+---------------|
+   | Olivia     | Bayer     | 539.597.3784 x971    | olivia.bayer@yahoo.com | GB      | LS25 3AX |        1 |             1 |
+   | Amelia     | Ziemann   | 439.776.0760 x16370  | amelia@live.com        | GB      | TF1 1JA  |        1 |            42 |
+   | Harry      | Weissnat  | 287.861.7897 x723    | harry@gmail.com        | GB      | SE18 6EY |        0 |            20 |
+   | Emily      | Stamm     | 1-442-456-4126 x6543 | emily@gmail.com        | AU      | LS25 3AX |        1 |            17 |
+   | Lucy       | Lueilwitz | (972) 434-9145       | lucy@yahoo.com         | GB      | SE18 6EY |        1 |            18 |
+
+** Combine
+
+   #+begin_src sqlite :tangle sql/02-select-combine-1.sql
+   SELECT first_name || ' ' || last_name AS fullname, shifts_worked
+   FROM workers
+   WHERE verified = true AND shifts_worked < 10
+   ORDER BY shifts_worked DESC
+   LIMIT 3;
+   #+end_src
+
+   #+RESULTS:
+   | fullname        | shifts_worked |
+   |-----------------+---------------|
+   | Charlotte Crona |             7 |
+   | George Miller   |             5 |
+   | Jessica Berge   |             4 |
+
 
 ** Excercise
+   Workers with name starting with capital O.
+
+   #+begin_src sqlite :tangle sql/02-select-excercise-1.sql
+   SELECT * FROM workers WHERE SUBSTR(first_name, 1, 1) = 'O';
+   #+end_src
+
+   #+RESULTS:
+   | first_name | last_name  | telephone             | email                  | country | postcode | verified | shifts_worked |
+   |------------+------------+-----------------------+------------------------+---------+----------+----------+---------------|
+   | Oliver     | Frami      | 123-049-9312 x75410   | oliver@hotmail.com     | US      | LS25 3AX |        1 |            87 |
+   | Oliver     | Huel       | 231-680-6707 x3907    | oliver@yahoo.com       | NZ      | SE8 5PA  |        1 |            11 |
+   | Olivia     | Bayer      | 539.597.3784 x971     | olivia.bayer@yahoo.com | GB      | LS25 3AX |        1 |             1 |
+   | Oliver     | Kuhic      | 798-471-9536 x56285   | oliver.kuhic@gmail.com | US      | TF1 1JA  |        0 |             8 |
+   | Olivia     | Kling      | 592-680-6368 x47550   | olivia@gmail.com       | GB      | TF1 1JA  |        0 |             3 |
+   | Oliver     | Cronin     | 1-450-883-3600 x67866 | oliver@gmail.com       | GB      | SE5 9JW  |        1 |            23 |
+   | Olivia     | Morissette | 818-814-6348 x669     | olivia@yahoo.com       | GB      | W1 9SD   |        1 |             1 |
+
 
 ** Further reading
