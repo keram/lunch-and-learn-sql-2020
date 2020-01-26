@@ -108,32 +108,32 @@ sqlite3 db/hello_world.sqlite
 
    We enclose texts in single or double quotes.
 
-   #+begin_src sqlite :colnames no :tangle sql/01/01-hello-world.sql
+   #+begin_src sqlite :colnames no :tangle sql/01-hello-world.sql
    SELECT 'Hello World!';
    #+end_src
 
    We separate returned columns by comma *,*.
-   #+begin_src sqlite :colnames no :tangle sql/01/01-hello-world-2.sql
+   #+begin_src sqlite :colnames no :tangle sql/01-hello-world-2.sql
    SELECT 'Hello', 'World!';
    #+end_src
 
    We can give a name (alias) to returned column.
-   #+begin_src sqlite :tangle sql/01/01-hello-world-3.sql
+   #+begin_src sqlite :tangle sql/01-hello-world-3.sql
    SELECT 'Hello World!' AS greeting;
    #+end_src
 
    We can join multiple texts together using **||**.
-   #+begin_src sqlite :colnames no :tangle sql/01/01-hello-world-4.sql
+   #+begin_src sqlite :colnames no :tangle sql/01-hello-world-4.sql
    SELECT 'Hello' || ' ' || 'World!';
    #+end_src
 
    We can also work with numbers.
-   #+begin_src sqlite  :tangle sql/01/01-numbers.sql
+   #+begin_src sqlite  :tangle sql/01-numbers.sql
    SELECT 5 + 3;
    #+end_src
 
    And do various arithmetic operations.
-   #+begin_src sqlite :tangle sql/01/01-numbers-2.sql
+   #+begin_src sqlite :tangle sql/01-numbers-2.sql
    SELECT
    5 + 3,
    eight * five,
@@ -144,22 +144,22 @@ sqlite3 db/hello_world.sqlite
    #+end_src
 
    But most of the time we work with tables.
-   #+begin_src sqlite :tangle sql/01/01-hello-world-5.sql
+   #+begin_src sqlite :tangle sql/01-hello-world-5.sql
    SELECT * FROM hello_worlds;
    #+end_src
 
    And want distinct (unique) rows.
-   #+begin_src sqlite :tangle sql/01/01-hello-world-6.sql
+   #+begin_src sqlite :tangle sql/01-hello-world-6.sql
    SELECT DISTINCT * from hello_worlds;
    #+end_src
 
    Sneak peak for second lesson.
 
-   #+begin_src sqlite :tangle sql/01/01-hello-world-7.sql
+   #+begin_src sqlite :tangle sql/01-hello-world-7.sql
    SELECT COUNT(*) from hello_worlds;
    #+end_src
 
-   #+begin_src sqlite :tangle sql/01/01-hello-world-8.sql
+   #+begin_src sqlite :tangle sql/01-hello-world-8.sql
    SELECT COUNT(DISTINCT language) from hello_worlds;
    #+end_src
 
