@@ -1,7 +1,7 @@
 # -*- mode: org; -*-
 
 #+NAME: init
-#+BEGIN_SRC shell
+#+BEGIN_SRC bash :exports none
 cd ..
 mkdir ../export/
 rm -r ../export/*.zip
@@ -11,5 +11,3 @@ do
  zip -r ../export/${i/\//\.}zip $i
 done
 #+END_SRC
-
-#+RESULTS: init
