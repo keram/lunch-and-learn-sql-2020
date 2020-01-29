@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-01-26 Sun 19:29 -->
+<!-- 2020-01-26 Sun 19:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SELECT - part one</title>
@@ -257,17 +257,17 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org68471eb">SELECT - part one</a>
+<li><a href="#org621a865">SELECT - part one</a>
 <ul>
-<li><a href="#orga3c0531">Theory</a></li>
-<li><a href="#org054b9a4">FROM</a></li>
-<li><a href="#org560ba6d">WHERE</a></li>
-<li><a href="#org7e5eead">ORDER BY</a></li>
-<li><a href="#org1378079">GROUP BY</a></li>
-<li><a href="#org4ba0cda">LIMIT</a></li>
-<li><a href="#org7b05408">Combine</a></li>
-<li><a href="#org336ec16">Excercise</a></li>
-<li><a href="#org688b3ae">Further reading</a></li>
+<li><a href="#orga5b61e7">Theory</a></li>
+<li><a href="#orgf55786b">FROM</a></li>
+<li><a href="#org81c6109">WHERE</a></li>
+<li><a href="#orge42e3dd">ORDER BY</a></li>
+<li><a href="#orga72b651">GROUP BY</a></li>
+<li><a href="#org814d07f">LIMIT</a></li>
+<li><a href="#org0c6844f">Combine</a></li>
+<li><a href="#orge1908fb">Excercise</a></li>
+<li><a href="#org605c57a">Further reading</a></li>
 </ul>
 </li>
 </ul>
@@ -277,17 +277,17 @@ for the JavaScript code in this tag.
 <a href="./../../index.html">Lunch And Learn SQL in 2020</a>
 </p>
 
-<div id="outline-container-org68471eb" class="outline-2">
-<h2 id="org68471eb">SELECT - part one</h2>
-<div class="outline-text-2" id="text-org68471eb">
+<div id="outline-container-org621a865" class="outline-2">
+<h2 id="org621a865">SELECT - part one</h2>
+<div class="outline-text-2" id="text-org621a865">
 <p>
-Being picky: filter, order group and/or limit.
+Being picky: filter, order, group and/or limit.
 </p>
 </div>
 
-<div id="outline-container-orga3c0531" class="outline-3">
-<h3 id="orga3c0531">Theory</h3>
-<div class="outline-text-3" id="text-orga3c0531">
+<div id="outline-container-orga5b61e7" class="outline-3">
+<h3 id="orga5b61e7">Theory</h3>
+<div class="outline-text-3" id="text-orga5b61e7">
 <p>
 DQL (Data Query Language) part of SQL
 </p>
@@ -304,9 +304,9 @@ SELECT [ DISTINCT | ALL ] { * | &lt;select list&gt; }
 </div>
 </div>
 
-<div id="outline-container-org054b9a4" class="outline-3">
-<h3 id="org054b9a4">FROM</h3>
-<div class="outline-text-3" id="text-org054b9a4">
+<div id="outline-container-orgf55786b" class="outline-3">
+<h3 id="orgf55786b">FROM</h3>
+<div class="outline-text-3" id="text-orgf55786b">
 <p>
 Get all from hello_worlds table.
 </p>
@@ -357,9 +357,9 @@ Note: this workers table does not match our production workers table
 </div>
 </div>
 
-<div id="outline-container-org560ba6d" class="outline-3">
-<h3 id="org560ba6d">WHERE</h3>
-<div class="outline-text-3" id="text-org560ba6d">
+<div id="outline-container-org81c6109" class="outline-3">
+<h3 id="org81c6109">WHERE</h3>
+<div class="outline-text-3" id="text-org81c6109">
 <p>
 (Workers from GB)
 </p>
@@ -386,9 +386,9 @@ AND
 </div>
 </div>
 
-<div id="outline-container-org7e5eead" class="outline-3">
-<h3 id="org7e5eead">ORDER BY</h3>
-<div class="outline-text-3" id="text-org7e5eead">
+<div id="outline-container-orge42e3dd" class="outline-3">
+<h3 id="orge42e3dd">ORDER BY</h3>
+<div class="outline-text-3" id="text-orge42e3dd">
 <pre class="example">
 ORDER BY column (ASC or DESC)
 </pre>
@@ -411,9 +411,9 @@ Descentant
 </div>
 </div>
 
-<div id="outline-container-org1378079" class="outline-3">
-<h3 id="org1378079">GROUP BY</h3>
-<div class="outline-text-3" id="text-org1378079">
+<div id="outline-container-orga72b651" class="outline-3">
+<h3 id="orga72b651">GROUP BY</h3>
+<div class="outline-text-3" id="text-orga72b651">
 <p>
 Numbers of workers per country.
 </p>
@@ -432,9 +432,9 @@ Shifts worked per country.
 </div>
 </div>
 
-<div id="outline-container-org4ba0cda" class="outline-3">
-<h3 id="org4ba0cda">LIMIT</h3>
-<div class="outline-text-3" id="text-org4ba0cda">
+<div id="outline-container-org814d07f" class="outline-3">
+<h3 id="org814d07f">LIMIT</h3>
+<div class="outline-text-3" id="text-org814d07f">
 <p>
 first five in database
 </p>
@@ -453,11 +453,12 @@ with offset (next ten)
 </div>
 </div>
 
-<div id="outline-container-org7b05408" class="outline-3">
-<h3 id="org7b05408">Combine</h3>
-<div class="outline-text-3" id="text-org7b05408">
+<div id="outline-container-org0c6844f" class="outline-3">
+<h3 id="org0c6844f">Combine</h3>
+<div class="outline-text-3" id="text-org0c6844f">
 <div class="org-src-container">
-<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> first_name || <span class="org-string">' '</span> || last_name <span class="org-keyword">AS</span> fullname, shifts_worked
+<span class="org-keyword">FROM</span> workers
 <span class="org-keyword">WHERE</span> verified = <span class="org-keyword">true</span> <span class="org-keyword">AND</span> shifts_worked &lt; 10
 <span class="org-keyword">ORDER</span> <span class="org-keyword">BY</span> shifts_worked <span class="org-keyword">DESC</span>
 <span class="org-keyword">LIMIT</span> 3;
@@ -467,9 +468,9 @@ with offset (next ten)
 </div>
 
 
-<div id="outline-container-org336ec16" class="outline-3">
-<h3 id="org336ec16">Excercise</h3>
-<div class="outline-text-3" id="text-org336ec16">
+<div id="outline-container-orge1908fb" class="outline-3">
+<h3 id="orge1908fb">Excercise</h3>
+<div class="outline-text-3" id="text-orge1908fb">
 <p>
 Workers with name starting with capital O.
 </p>
@@ -482,13 +483,13 @@ Workers with name starting with capital O.
 </div>
 
 
-<div id="outline-container-org688b3ae" class="outline-3">
-<h3 id="org688b3ae">Further reading</h3>
+<div id="outline-container-org605c57a" class="outline-3">
+<h3 id="org605c57a">Further reading</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2020-01-26 Sun 19:29</p>
+<p class="date">Created: 2020-01-26 Sun 19:57</p>
 </div>
 </body>
 </html>

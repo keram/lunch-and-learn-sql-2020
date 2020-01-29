@@ -8,7 +8,7 @@
 
 * SELECT - part one
 
-  Being picky: filter, order group and/or limit.
+  Being picky: filter, order, group and/or limit.
 
   # ** Refresher
   #    #+begin_src sqlite
