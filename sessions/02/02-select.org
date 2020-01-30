@@ -50,6 +50,17 @@
   # |---------------------|
   # |                   6 |
 
+** Start
+
+   After starting sqlite in the main directory as described in [[../../index.html#workshop-instructions][Instructions]], type:
+   #+begin_src sqlite
+   .open sessions/02/db/week_2.sqlite
+   #+end_src
+
+ #+ATTR_HTML: :alt Screenshot of opening database  :width 90%
+ [[file:assets/open_week_2_db.png][file:assets/open_week_2_db.png]]
+
+
 ** Theory
 
    DQL (Data Query Language) part of SQL

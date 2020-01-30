@@ -1,54 +1,148 @@
 #+TITLE: Lunch And Learn SQL in 2020
 #+SETUPFILE: theme-bigblow-local-root.setup
 #+OPTIONS: toc:nil
+#+OPTIONS: num:nil
 #+OPTIONS: ^:nil
 #+INCLUDE: code.inc
 #+CALL: init()
 
 * Agenda
+  :PROPERTIES:
+  :CUSTOM_ID: workshop-agenda
+  :END:
 
- - [[./sessions/01/01-getting-started.org][Week 1: Getting Started - Why and How]]
+  - [[./sessions/01/01-getting-started.org][Week 1: Getting Started - Why and How]]
 
-   Why is it useful and how you can start, and run your first queries.
+    Why is it useful and how you can start, and run your first queries.
 
-   [[./export/01.zip][Download]]
+    [[./export/01.zip][Download]]
 
- - [[./sessions/02/02-select.org][Week 2: SELECT]]
+  - [[./sessions/02/02-select.org][Week 2: SELECT]]
 
-   Being picky: filter, order and group.
+    Being picky: filter, order, group and/or limit.
 
-   [[./export/02.zip][Download]]
+    [[./export/02.zip][Download]]
 
- - Week 3: INSERT, UPDATE and DELETE
+  - [[./sessions/03/03-insert-update-and-delete.org][Week 3: INSERT, UPDATE and DELETE]]
 
-   Change is inevitable.
+    Change is inevitable
 
- - Week 4: SELECT part 2
+    [[./export/03.zip][Download]]
 
-   Joins, grouping and extra filtering.
+  - [[./sessions/04/04-select-part2.org][Week 4: SELECT part 2]]
 
- - Week 5: DATABASE
+    Joins, grouping and extra filtering.
 
-   Creating own data model, decomposition, etc..
+    [[./export/04.zip][Download]]
 
- - Week 6: PostgreSQL
+  - [[./sessions/05/05-database.org][Week 5: DATABASE]]
 
-   Specific features, postgis, json..
+    Creating own data model, decomposition.
 
- - Week 7: SYFT data model
+    [[./export/05.zip][Download]]
 
-   Orienting in syft tables.
+  - [[./sessions/06/06-postgresql.org][Week 6: PostgreSQL]]
 
- - Week 8: SYFT data model 2
+    Specific features, postgis, json and more.
 
-   Getting answers to specific questions over syft dataset.
+    [[./export/06.zip][Download]]
 
- - Week 9: SELECT part 3
+  - [[./sessions/07/07-syft-data-model.org][Week 7: Syft data model]]
 
- - Week 10: Fun with SQL and beyond
+    Orienting in Syft tables.
 
-   Nulls, injections etc.
+    [[./export/07.zip][Download]]
+
+  - [[./sessions/08/08-syft-part2.org][Week 8: Syft part 2]]
+
+    Getting answers to specific questions over Syft dataset.
+
+    [[./export/08.zip][Download]]
+
+  - [[./sessions/09/09-select-part3.org][Week 9: SELECT part 3]]
+
+    [[./export/09.zip][Download]]
+
+  - [[./sessions/10/10-fun-with-sql-and-beyond.org][Week 10: Fun with SQL and beyond]]
+
+    Nulls, injections and more.
+
+    [[./export/02.zip][Download]]
 
 * Instructions
+  :PROPERTIES:
+  :CUSTOM_ID: workshop-instructions
+  :END:
 
-TODO
+  - Download the workshop from download section.
+
+** macOS - OSX
+
+   - Unpack in Finder
+
+   - Right click on unpacked directory -> Services -> New Terminal at Folder
+
+   #+begin_center
+   #+ATTR_HTML: :alt Screenshot of right click action :width 90%
+   [[file:assets/osx_instructions.png][file:assets/osx_instructions_thumb.png]]
+   (Click on the image for full size)
+   #+end_center
+
+   - Type in the terminal window:
+
+   #+begin_src shell
+   bin/sqlite3
+   #+end_src
+
+   #+begin_center
+   #+ATTR_HTML: :alt Screenshot of typing bin/sqlite3 in open terminal  :width 90%
+   [[file:assets/osx_instructions2.png][file:assets/osx_instructions2.png]]
+   (Click on the image for full size)
+   #+end_center
+
+** Windows
+
+   - Unpack the download directory (double click on zip file)
+
+   - Shift and right click on unpacked directory -> Open Powershell window here
+
+   #+begin_center
+   #+ATTR_HTML: :alt Screenshot of right click action :width 90%
+   [[file:assets/win_instructions.png][file:assets/win_instructions.png]]
+   (Click on the image for full size)
+   #+end_center
+
+   - Type in the terminal window:
+
+   #+begin_src shell
+   bin/sqlite3.exe
+   #+end_src
+
+   #+begin_center
+   #+ATTR_HTML: :alt Screenshot of typing bin/sqlite3 in open terminal  :width 90%
+   [[file:assets/win_instructions2.png][file:assets/win_instructions2.png]]
+   (Click on the image for full size)
+   #+end_center
+
+
+* Code of Conduct
+  :PROPERTIES:
+  :CUSTOM_ID: workshop-coc
+  :END:
+
+** Attendance is voluntary
+
+** Welcoming and friendly learning environment.
+
+** A harassment-free experience for everyone is essential.
+
+** All questions and feedback welcome.
+
+* Download
+  :PROPERTIES:
+  :CUSTOM_ID: workshop-download
+  :END:
+
+** Latest release
+
+   https://github.com/keram/lunch-and-learn-sql-2020/releases/latest

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-01-26 Sun 19:52 -->
+<!-- 2020-01-30 Thu 01:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lunch And Learn SQL in 2020</title>
@@ -255,9 +255,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Lunch And Learn SQL in 2020</h1>
 
-<div id="outline-container-orgbdf5e7d" class="outline-2">
-<h2 id="orgbdf5e7d"><span class="section-number-2">1</span> Agenda</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-org0b067c5" class="outline-2">
+<h2 id="workshop-agenda">Agenda</h2>
+<div class="outline-text-2" id="text-workshop-agenda">
 <ul class="org-ul">
 <li><p>
 <a href="./sessions/01/01-getting-started.html">Week 1: Getting Started - Why and How</a>
@@ -276,7 +276,7 @@ Why is it useful and how you can start, and run your first queries.
 </p>
 
 <p>
-Being picky: filter, order and group.
+Being picky: filter, order, group and/or limit.
 </p>
 
 <p>
@@ -284,78 +284,218 @@ Being picky: filter, order and group.
 </p></li>
 
 <li><p>
-Week 3: INSERT, UPDATE and DELETE
+<a href="./sessions/03/03-insert-update-and-delete.html">Week 3: INSERT, UPDATE and DELETE</a>
 </p>
 
 <p>
-Change is inevitable.
+Change is inevitable
+</p>
+
+<p>
+<a href="./export/03.zip">Download</a>
 </p></li>
 
 <li><p>
-Week 4: SELECT part 2
+<a href="./sessions/04/04-select-part2.html">Week 4: SELECT part 2</a>
 </p>
 
 <p>
 Joins, grouping and extra filtering.
-</p></li>
-
-<li><p>
-Week 5: DATABASE
 </p>
 
 <p>
-Creating own data model, decomposition, etc..
+<a href="./export/04.zip">Download</a>
 </p></li>
 
 <li><p>
-Week 6: PostgreSQL
+<a href="./sessions/05/05-database.html">Week 5: DATABASE</a>
 </p>
 
 <p>
-Specific features, postgis, json..
+Creating own data model, decomposition.
+</p>
+
+<p>
+<a href="./export/05.zip">Download</a>
 </p></li>
 
 <li><p>
-Week 7: SYFT data model
+<a href="./sessions/06/06-postgresql.html">Week 6: PostgreSQL</a>
 </p>
 
 <p>
-Orienting in syft tables.
+Specific features, postgis, json and more.
+</p>
+
+<p>
+<a href="./export/06.zip">Download</a>
 </p></li>
 
 <li><p>
-Week 8: SYFT data model 2
+<a href="./sessions/07/07-syft-data-model.html">Week 7: Syft data model</a>
 </p>
 
 <p>
-Getting answers to specific questions over syft dataset.
+Orienting in Syft tables.
+</p>
+
+<p>
+<a href="./export/07.zip">Download</a>
 </p></li>
 
-<li>Week 9: SELECT part 3</li>
-
 <li><p>
-Week 10: Fun with SQL and beyond
+<a href="./sessions/08/08-syft-part2.html">Week 8: Syft part 2</a>
 </p>
 
 <p>
-Nulls, injections etc.
+Getting answers to specific questions over Syft dataset.
+</p>
+
+<p>
+<a href="./export/08.zip">Download</a>
+</p></li>
+
+<li><p>
+<a href="./sessions/09/09-select-part3.html">Week 9: SELECT part 3</a>
+</p>
+
+<p>
+<a href="./export/09.zip">Download</a>
+</p></li>
+
+<li><p>
+<a href="./sessions/10/10-fun-with-sql-and-beyond.html">Week 10: Fun with SQL and beyond</a>
+</p>
+
+<p>
+Nulls, injections and more.
+</p>
+
+<p>
+<a href="./export/02.zip">Download</a>
 </p></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org7508294" class="outline-2">
-<h2 id="org7508294"><span class="section-number-2">2</span> Instructions</h2>
-<div class="outline-text-2" id="text-2">
-<p>
-TODO
+<div id="outline-container-org63c2862" class="outline-2">
+<h2 id="workshop-instructions">Instructions</h2>
+<div class="outline-text-2" id="text-workshop-instructions">
+<ul class="org-ul">
+<li>Download the workshop from download section.</li>
+</ul>
+</div>
+
+<div id="outline-container-orgcb05da4" class="outline-3">
+<h3 id="orgcb05da4">macOS - OSX</h3>
+<div class="outline-text-3" id="text-orgcb05da4">
+<ul class="org-ul">
+<li>Unpack in Finder</li>
+
+<li>Right click on unpacked directory -&gt; Services -&gt; New Terminal at Folder</li>
+</ul>
+
+<div class="org-center">
+<p alt="Screenshot of right click action" width="90%">
+<a href="assets/osx_instructions.png" alt="Screenshot of right click action" width="90%"><img src="assets/osx_instructions_thumb.png" alt="Screenshot of right click action" width="90%" /></a>
+(Click on the image for full size)
 </p>
+</div>
+
+<ul class="org-ul">
+<li>Type in the terminal window:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-shell">bin/sqlite3
+</pre>
+</div>
+
+<div class="org-center">
+<p alt="Screenshot of typing bin/sqlite3 in open terminal" width="90%">
+<a href="assets/osx_instructions2.png" alt="Screenshot of typing bin/sqlite3 in open terminal" width="90%"><img src="assets/osx_instructions2.png" alt="Screenshot of typing bin/sqlite3 in open terminal" width="90%" /></a>
+(Click on the image for full size)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd224d53" class="outline-3">
+<h3 id="orgd224d53">Windows</h3>
+<div class="outline-text-3" id="text-orgd224d53">
+<ul class="org-ul">
+<li>Unpack the download directory (double click on zip file)</li>
+
+<li>Shift and right click on unpacked directory -&gt; Open Powershell window here</li>
+</ul>
+
+<div class="org-center">
+<p alt="Screenshot of right click action" width="90%">
+<a href="assets/win_instructions.png" alt="Screenshot of right click action" width="90%"><img src="assets/win_instructions.png" alt="Screenshot of right click action" width="90%" /></a>
+(Click on the image for full size)
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Type in the terminal window:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-shell">bin/sqlite3.exe
+</pre>
+</div>
+
+<div class="org-center">
+<p alt="Screenshot of typing bin/sqlite3 in open terminal" width="90%">
+<a href="assets/win_instructions2.png" alt="Screenshot of typing bin/sqlite3 in open terminal" width="90%"><img src="assets/win_instructions2.png" alt="Screenshot of typing bin/sqlite3 in open terminal" width="90%" /></a>
+(Click on the image for full size)
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org612917a" class="outline-2">
+<h2 id="workshop-coc">Code of Conduct</h2>
+<div class="outline-text-2" id="text-workshop-coc">
+</div>
+
+<div id="outline-container-orgb7dd8f1" class="outline-3">
+<h3 id="orgb7dd8f1">Attendance is voluntary</h3>
+</div>
+
+<div id="outline-container-orgfc4ccb4" class="outline-3">
+<h3 id="orgfc4ccb4">Welcoming and friendly learning environment.</h3>
+</div>
+
+<div id="outline-container-org7ab7679" class="outline-3">
+<h3 id="org7ab7679">A harassment-free experience for everyone is essential.</h3>
+</div>
+
+<div id="outline-container-org47c794b" class="outline-3">
+<h3 id="org47c794b">All questions and feedback welcome.</h3>
+</div>
+</div>
+
+<div id="outline-container-org61e08d7" class="outline-2">
+<h2 id="workshop-download">Download</h2>
+<div class="outline-text-2" id="text-workshop-download">
+</div>
+
+<div id="outline-container-orgc0b9273" class="outline-3">
+<h3 id="orgc0b9273">Latest release</h3>
+<div class="outline-text-3" id="text-orgc0b9273">
+<p>
+<a href="https://github.com/keram/lunch-and-learn-sql-2020/releases/latest">https://github.com/keram/lunch-and-learn-sql-2020/releases/latest</a>
+</p>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: mla</p>
-<p class="date">Created: 2020-01-26 Sun 19:52</p>
+<p class="date">Created: 2020-01-30 Thu 01:41</p>
 </div>
 </body>
 </html>

@@ -99,9 +99,14 @@
 
 ** First Queries
 
-   #+begin_src cmd :tangle no
-sqlite3 db/hello_world.sqlite
-   #+end_src
+    After starting sqlite in the main directory as described in [[../../index.html#workshop-instructions][Instructions]], type:
+    #+begin_src sqlite
+    .open sessions/01/db/hello_world.sqlite
+    #+end_src
+
+  #+ATTR_HTML: :alt Screenshot of opening database :width 90%
+  [[file:assets/open_session_1_db.png][file:assets/open_session_1_db.png]]
+
 
    # Is required by law to print out "hello world!" as first touch
    # with any programming language.
