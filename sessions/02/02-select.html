@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-01-30 Thu 01:00 -->
+<!-- 2020-01-30 Thu 11:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SELECT - part one</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Marek L" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -257,18 +258,18 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org1de9f2e">SELECT - part one</a>
+<li><a href="#org18214b6">SELECT - part one</a>
 <ul>
-<li><a href="#orgb7d9203">Start</a></li>
-<li><a href="#orgec07cf8">Theory</a></li>
-<li><a href="#org6021733">FROM</a></li>
-<li><a href="#org3080fc2">WHERE</a></li>
-<li><a href="#org16e5aeb">ORDER BY</a></li>
-<li><a href="#org319d5f2">GROUP BY</a></li>
-<li><a href="#org6b02a81">LIMIT</a></li>
-<li><a href="#org1e587a1">Combine</a></li>
-<li><a href="#org1b3098a">Excercise</a></li>
-<li><a href="#org7103caa">Further reading</a></li>
+<li><a href="#org9d26af2">Start</a></li>
+<li><a href="#orgbd4090e">Theory</a></li>
+<li><a href="#org223ee2f">FROM</a></li>
+<li><a href="#org6e5f4d2">WHERE</a></li>
+<li><a href="#org86dc676">ORDER BY</a></li>
+<li><a href="#org0cc4e0d">GROUP BY</a></li>
+<li><a href="#org6f31398">LIMIT</a></li>
+<li><a href="#orgf4c6ffc">Combine</a></li>
+<li><a href="#org9997ab7">Excercise</a></li>
+<li><a href="#orgfd075b5">Further reading</a></li>
 </ul>
 </li>
 </ul>
@@ -278,17 +279,17 @@ for the JavaScript code in this tag.
 <a href="./../../index.html">Lunch And Learn SQL in 2020</a>
 </p>
 
-<div id="outline-container-org1de9f2e" class="outline-2">
-<h2 id="org1de9f2e">SELECT - part one</h2>
-<div class="outline-text-2" id="text-org1de9f2e">
+<div id="outline-container-org18214b6" class="outline-2">
+<h2 id="org18214b6">SELECT - part one</h2>
+<div class="outline-text-2" id="text-org18214b6">
 <p>
 Being picky: filter, order, group and/or limit.
 </p>
 </div>
 
-<div id="outline-container-orgb7d9203" class="outline-3">
-<h3 id="orgb7d9203">Start</h3>
-<div class="outline-text-3" id="text-orgb7d9203">
+<div id="outline-container-org9d26af2" class="outline-3">
+<h3 id="org9d26af2">Start</h3>
+<div class="outline-text-3" id="text-org9d26af2">
 <p>
 After starting sqlite in the main directory as described in <a href="../../index.html#workshop-instructions">Instructions</a>, type:
 </p>
@@ -306,9 +307,9 @@ After starting sqlite in the main directory as described in <a href="../../index
 </div>
 
 
-<div id="outline-container-orgec07cf8" class="outline-3">
-<h3 id="orgec07cf8">Theory</h3>
-<div class="outline-text-3" id="text-orgec07cf8">
+<div id="outline-container-orgbd4090e" class="outline-3">
+<h3 id="orgbd4090e">Theory</h3>
+<div class="outline-text-3" id="text-orgbd4090e">
 <p>
 DQL (Data Query Language) part of SQL
 </p>
@@ -325,9 +326,9 @@ SELECT [ DISTINCT | ALL ] { * | &lt;select list&gt; }
 </div>
 </div>
 
-<div id="outline-container-org6021733" class="outline-3">
-<h3 id="org6021733">FROM</h3>
-<div class="outline-text-3" id="text-org6021733">
+<div id="outline-container-org223ee2f" class="outline-3">
+<h3 id="org223ee2f">FROM</h3>
+<div class="outline-text-3" id="text-org223ee2f">
 <p>
 Get all from hello_worlds table.
 </p>
@@ -378,9 +379,9 @@ Note: this workers table does not match our production workers table
 </div>
 </div>
 
-<div id="outline-container-org3080fc2" class="outline-3">
-<h3 id="org3080fc2">WHERE</h3>
-<div class="outline-text-3" id="text-org3080fc2">
+<div id="outline-container-org6e5f4d2" class="outline-3">
+<h3 id="org6e5f4d2">WHERE</h3>
+<div class="outline-text-3" id="text-org6e5f4d2">
 <p>
 (Workers from GB)
 </p>
@@ -407,9 +408,9 @@ AND
 </div>
 </div>
 
-<div id="outline-container-org16e5aeb" class="outline-3">
-<h3 id="org16e5aeb">ORDER BY</h3>
-<div class="outline-text-3" id="text-org16e5aeb">
+<div id="outline-container-org86dc676" class="outline-3">
+<h3 id="org86dc676">ORDER BY</h3>
+<div class="outline-text-3" id="text-org86dc676">
 <pre class="example">
 ORDER BY column (ASC or DESC)
 </pre>
@@ -432,9 +433,9 @@ Descentant
 </div>
 </div>
 
-<div id="outline-container-org319d5f2" class="outline-3">
-<h3 id="org319d5f2">GROUP BY</h3>
-<div class="outline-text-3" id="text-org319d5f2">
+<div id="outline-container-org0cc4e0d" class="outline-3">
+<h3 id="org0cc4e0d">GROUP BY</h3>
+<div class="outline-text-3" id="text-org0cc4e0d">
 <p>
 Numbers of workers per country.
 </p>
@@ -453,9 +454,9 @@ Shifts worked per country.
 </div>
 </div>
 
-<div id="outline-container-org6b02a81" class="outline-3">
-<h3 id="org6b02a81">LIMIT</h3>
-<div class="outline-text-3" id="text-org6b02a81">
+<div id="outline-container-org6f31398" class="outline-3">
+<h3 id="org6f31398">LIMIT</h3>
+<div class="outline-text-3" id="text-org6f31398">
 <p>
 first five in database
 </p>
@@ -474,9 +475,9 @@ with offset (next ten)
 </div>
 </div>
 
-<div id="outline-container-org1e587a1" class="outline-3">
-<h3 id="org1e587a1">Combine</h3>
-<div class="outline-text-3" id="text-org1e587a1">
+<div id="outline-container-orgf4c6ffc" class="outline-3">
+<h3 id="orgf4c6ffc">Combine</h3>
+<div class="outline-text-3" id="text-orgf4c6ffc">
 <div class="org-src-container">
 <pre class="src src-sqlite"><span class="org-keyword">SELECT</span> first_name || <span class="org-string">' '</span> || last_name <span class="org-keyword">AS</span> fullname, shifts_worked
 <span class="org-keyword">FROM</span> workers
@@ -489,28 +490,23 @@ with offset (next ten)
 </div>
 
 
-<div id="outline-container-org1b3098a" class="outline-3">
-<h3 id="org1b3098a">Excercise</h3>
-<div class="outline-text-3" id="text-org1b3098a">
-<p>
-Workers with name starting with capital O.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">WHERE</span> SUBSTR(first_name, 1, 1) = <span class="org-string">'O'</span>;
-</pre>
-</div>
+<div id="outline-container-org9997ab7" class="outline-3">
+<h3 id="org9997ab7">Excercise</h3>
+<div class="outline-text-3" id="text-org9997ab7">
+<ul class="org-ul">
+<li>Get workers with first name starting with capital O.</li>
+</ul>
 </div>
 </div>
 
-
-<div id="outline-container-org7103caa" class="outline-3">
-<h3 id="org7103caa">Further reading</h3>
+<div id="outline-container-orgfd075b5" class="outline-3">
+<h3 id="orgfd075b5">Further reading</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2020-01-30 Thu 01:00</p>
+<p class="author">Author: Marek L</p>
+<p class="date">Created: 2020-01-30 Thu 11:38</p>
 </div>
 </body>
 </html>

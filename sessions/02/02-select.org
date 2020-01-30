@@ -364,22 +364,7 @@
 
 
 ** Excercise
-   Workers with name starting with capital O.
 
-   #+begin_src sqlite :tangle sql/02-select-excercise-1.sql
-   SELECT * FROM workers WHERE SUBSTR(first_name, 1, 1) = 'O';
-   #+end_src
-
-   #+RESULTS:
-   | first_name | last_name  | telephone             | email                  | country | postcode | verified | shifts_worked |
-   |------------+------------+-----------------------+------------------------+---------+----------+----------+---------------|
-   | Oliver     | Frami      | 123-049-9312 x75410   | oliver@hotmail.com     | US      | LS25 3AX |        1 |            87 |
-   | Oliver     | Huel       | 231-680-6707 x3907    | oliver@yahoo.com       | NZ      | SE8 5PA  |        1 |            11 |
-   | Olivia     | Bayer      | 539.597.3784 x971     | olivia.bayer@yahoo.com | GB      | LS25 3AX |        1 |             1 |
-   | Oliver     | Kuhic      | 798-471-9536 x56285   | oliver.kuhic@gmail.com | US      | TF1 1JA  |        0 |             8 |
-   | Olivia     | Kling      | 592-680-6368 x47550   | olivia@gmail.com       | GB      | TF1 1JA  |        0 |             3 |
-   | Oliver     | Cronin     | 1-450-883-3600 x67866 | oliver@gmail.com       | GB      | SE5 9JW  |        1 |            23 |
-   | Olivia     | Morissette | 818-814-6348 x669     | olivia@yahoo.com       | GB      | W1 9SD   |        1 |             1 |
-
+   - Get workers with first name starting with capital O.
 
 ** Further reading
