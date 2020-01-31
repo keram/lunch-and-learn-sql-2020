@@ -1,0 +1,199 @@
+#+TITLE: INSERT, UPDATE and DELETE
+#+SETUPFILE: ../../theme-bigblow-local.setup
+#+OPTIONS: num:nil
+#+OPTIONS: ^:nil
+#+PROPERTY: header-args:sqlite :db week_3.sqlite :dir db/ :colnames yes :exports code
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/session.css"/>
+#+HTML_HEAD: <script type="text/javascript" src="assets/session.js"></script>
+
+[[./../../index.org][Lunch And Learn SQL in 2020]]
+
+* INSERT, UPDATE and DELETE
+
+  Change is inevitable.
+
+** Start
+
+   *Existing students:*
+
+   To follow this session on your computer download [[./../../export/03.zip][this session zip bundle]],
+   unpack it into /sessions/03/ directory in previously downloaded project release.
+
+   #+begin_center
+   #+ATTR_HTML: :alt Screenshot of extracting the session on windows :width 40%
+   [[file:assets/win_individual_session_install2.PNG][file:assets/win_individual_session_install2.PNG]]
+   (Click on the image for full size)
+   #+end_center
+
+
+   *New students:*
+
+   Download the whole workshop project as described in [[../../index.html#workshop-instructions][Instructions]] which now comes bundled with session 1, 2 and 3
+
+   *Both:*
+
+   After starting sqlite in the main directory as described in [[../../index.html#workshop-instructions][Instructions]], type:
+   #+begin_src sqlite :tangle sql/03-start.sql
+   .open sessions/03/db/week_3.sqlite
+   #+end_src
+
+** Refresh
+   Last time we looked how to retrieve data from existing table and filter them based on specific criteria.
+   (We used command ~.tables~ to see list of tables in our database.)
+
+   As example to get workers whose first name starts with capital /O/ we can write:
+
+   #+begin_src sqlite :tangle sql/03-refresh-1.sql :exports both
+   SELECT * FROM workers WHERE SUBSTR(first_name, 1, 1) = 'O';
+   #+end_src
+
+   #+RESULTS:
+   | first_name | last_name  | telephone             | email                  | country | postcode | verified | shifts_worked |
+   |------------+------------+-----------------------+------------------------+---------+----------+----------+---------------|
+   | Oliver     | Frami      | 123-049-9312 x75410   | oliver@hotmail.com     | US      | LS25 3AX |        1 |            87 |
+   | Oliver     | Huel       | 231-680-6707 x3907    | oliver@yahoo.com       | NZ      | SE8 5PA  |        1 |            11 |
+   | Olivia     | Bayer      | 539.597.3784 x971     | olivia.bayer@yahoo.com | GB      | LS25 3AX |        1 |             1 |
+   | Oliver     | Kuhic      | 798-471-9536 x56285   | oliver.kuhic@gmail.com | US      | TF1 1JA  |        0 |             8 |
+   | Olivia     | Kling      | 592-680-6368 x47550   | olivia@gmail.com       | GB      | TF1 1JA  |        0 |             3 |
+   | Oliver     | Cronin     | 1-450-883-3600 x67866 | oliver@gmail.com       | GB      | SE5 9JW  |        1 |            23 |
+   | Olivia     | Morissette | 818-814-6348 x669     | olivia@yahoo.com       | GB      | W1 9SD   |        1 |             1 |
+
+   [[https://www.sqlite.org/lang_corefunc.html#substr][SQLite SUBSTR function documentation]]
+
+** Theory
+
+   DML (Data Manipulation Language) part of SQL
+
+ #+begin_example
+   INSERT INTO ... VALUES ...
+   UPDATE ... SET ... WHERE ...
+   DELETE FROM ... WHERE ...
+ #+end_example
+
+** INSERT
+
+   Syntax
+
+   #+begin_example
+   INSERT INTO <table name>
+   [ ( <column name> [ { , <column name> } . . . ] ) ]
+   VALUES ( <value> [ { , <value> } . . . ] )
+   #+end_example
+
+   Example
+
+   #+begin_src sqlite :tangle sql/03-insert.sql
+   INSERT INTO hello_worlds
+   (hello, world, language)
+   VALUES ('szia', 'világ', 'Hungarian');
+   #+end_src
+
+   Practice
+
+   Insert new worker with following details into workers table:
+
+   - first name: James
+   - last name: Bond
+   - telephone: 007
+   - email: james@mi5.co.uk
+   - country: GB
+   - postcode: null
+   - verified: true
+   - shifts_worked: null
+
+   #+begin_export html
+   <div class="answer">
+   <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+   #+end_export
+
+   #+begin_src sqlite :tangle sql/03-insert-answer.sql
+   INSERT INTO workers
+   (first_name, last_name, telephone, email, country,
+   postcode, verified, shifts_worked)
+   VALUES ('James', 'Bond', '007', 'james@mi5.co.uk', 'GB', null, true, null)
+   #+end_src
+
+   #+begin_export html
+   </div>
+   #+end_export
+
+** UPDATE
+
+   Syntax
+
+   #+begin_example
+   UPDATE <table name>
+   SET <set clause expression> [ { , <set clause expression> } . . . ]
+   [ WHERE <search condition> ]
+   #+end_example
+
+   Example
+
+   #+begin_src sqlite :tangle sql/03-update.sql
+   UPDATE hello_worlds
+   SET world = 'mondo'
+   WHERE language = 'Italian';
+   #+end_src
+
+   Practice
+
+   Unverify all workers living at postcode: *SE8 5PA*
+
+   #+begin_export html
+   <div class="answer">
+   <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+   #+end_export
+
+   #+begin_src sqlite :tangle sql/03-update-answer.sql
+   UPDATE workers
+   SET verified = false
+   WHERE postcode = 'SE8 5PA';
+   #+end_src
+
+   #+begin_export html
+   </div>
+   #+end_export
+
+
+** DELETE
+
+   Syntax
+
+   #+begin_example
+   DELETE FROM <table name>
+   [ WHERE <search condition>
+   #+end_example
+
+   Example
+
+   #+begin_src sqlite :tangle sql/03-delete.sql
+   DELETE FROM hello_worlds
+   WHERE language = 'Spanish';
+   #+end_src
+
+   To ensure we delete or update only specif number of rows we can also use the /LIMIT/ clause:
+
+   #+begin_src sqlite :tangle sql/03-delete-1.sql
+   DELETE FROM hello_worlds
+   WHERE language = 'English'
+   LIMIT 1;
+   #+end_src
+
+   Practice
+
+   Delete workers whose name is /Oliver/ or did less than 5 shifts.
+
+   #+begin_export html
+   <div class="answer">
+   <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+   #+end_export
+
+   #+begin_src sqlite :tangle sql/03-delete-answer.sql
+   DELETE workers WHERE shifts_worked < 5 OR first_name = 'Oliver';
+   #+end_src
+
+   #+begin_export html
+   </div>
+   #+end_export
+
+** Further reading

@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-02-06 Thu 03:13 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>INSERT, UPDATE and DELETE</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../styles/bigblow/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../styles/bigblow/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="../../styles/bigblow/css/hideshow.css"/>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/bigblow.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/hideshow.js"></script>
+<script type="text/javascript" src="../../styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/session.css"/>
+<script type="text/javascript" src="assets/session.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">INSERT, UPDATE and DELETE</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org02c239c">INSERT, UPDATE and DELETE</a>
+<ul>
+<li><a href="#orgeaf194d">Start</a></li>
+<li><a href="#orgcea3d01">Refresh</a></li>
+<li><a href="#orgdf3cdb3">Theory</a></li>
+<li><a href="#orgd374595">INSERT</a></li>
+<li><a href="#org17d9c34">UPDATE</a></li>
+<li><a href="#org83412ae">DELETE</a></li>
+<li><a href="#org84075b9">Further reading</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<a href="./../../index.html">Lunch And Learn SQL in 2020</a>
+</p>
+
+<div id="outline-container-org02c239c" class="outline-2">
+<h2 id="org02c239c">INSERT, UPDATE and DELETE</h2>
+<div class="outline-text-2" id="text-org02c239c">
+<p>
+Change is inevitable.
+</p>
+</div>
+
+<div id="outline-container-orgeaf194d" class="outline-3">
+<h3 id="orgeaf194d">Start</h3>
+<div class="outline-text-3" id="text-orgeaf194d">
+<p>
+<b>Existing students:</b>
+</p>
+
+<p>
+To follow this session on your computer download <a href="./../../export/03.zip">this session zip bundle</a>,
+unpack it into <i>sessions/03</i> directory in previously downloaded project release.
+</p>
+
+<div class="org-center">
+<p alt="Screenshot of extracting the session on windows" width="40%">
+<a href="assets/win_individual_session_install2.PNG" alt="Screenshot of extracting the session on windows" width="40%"><img src="assets/win_individual_session_install2.PNG" alt="Screenshot of extracting the session on windows" width="40%" /></a>
+(Click on the image for full size)
+</p>
+</div>
+
+
+<p>
+<b>New students:</b>
+</p>
+
+<p>
+Download the whole workshop project as described in <a href="../../index.html#workshop-instructions">Instructions</a> which now comes bundled with session 1, 2 and 3
+</p>
+
+<p>
+<b>Both:</b>
+</p>
+
+<p>
+After starting sqlite in the main directory as described in <a href="../../index.html#workshop-instructions">Instructions</a>, type:
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite">.<span class="org-keyword">open</span> sessions/03/db/week_3.sqlite
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcea3d01" class="outline-3">
+<h3 id="orgcea3d01">Refresh</h3>
+<div class="outline-text-3" id="text-orgcea3d01">
+<p>
+Last time we looked how to retrieve data from existing table and filter them based on specific criteria.
+(We used command <code>.tables</code> to see list of tables in our database.)
+</p>
+
+<p>
+As example to get workers whose first name starts with capital <i>O</i> we can write:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">WHERE</span> SUBSTR(first_name, 1, 1) = <span class="org-string">'O'</span>;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">first_name</th>
+<th scope="col" class="org-left">last_name</th>
+<th scope="col" class="org-left">telephone</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">country</th>
+<th scope="col" class="org-left">postcode</th>
+<th scope="col" class="org-right">verified</th>
+<th scope="col" class="org-right">shifts_worked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Oliver</td>
+<td class="org-left">Frami</td>
+<td class="org-left">123-049-9312 x75410</td>
+<td class="org-left">oliver@hotmail.com</td>
+<td class="org-left">US</td>
+<td class="org-left">LS25 3AX</td>
+<td class="org-right">1</td>
+<td class="org-right">87</td>
+</tr>
+
+<tr>
+<td class="org-left">Oliver</td>
+<td class="org-left">Huel</td>
+<td class="org-left">231-680-6707 x3907</td>
+<td class="org-left">oliver@yahoo.com</td>
+<td class="org-left">NZ</td>
+<td class="org-left">SE8 5PA</td>
+<td class="org-right">1</td>
+<td class="org-right">11</td>
+</tr>
+
+<tr>
+<td class="org-left">Olivia</td>
+<td class="org-left">Bayer</td>
+<td class="org-left">539.597.3784 x971</td>
+<td class="org-left">olivia.bayer@yahoo.com</td>
+<td class="org-left">GB</td>
+<td class="org-left">LS25 3AX</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">Oliver</td>
+<td class="org-left">Kuhic</td>
+<td class="org-left">798-471-9536 x56285</td>
+<td class="org-left">oliver.kuhic@gmail.com</td>
+<td class="org-left">US</td>
+<td class="org-left">TF1 1JA</td>
+<td class="org-right">0</td>
+<td class="org-right">8</td>
+</tr>
+
+<tr>
+<td class="org-left">Olivia</td>
+<td class="org-left">Kling</td>
+<td class="org-left">592-680-6368 x47550</td>
+<td class="org-left">olivia@gmail.com</td>
+<td class="org-left">GB</td>
+<td class="org-left">TF1 1JA</td>
+<td class="org-right">0</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left">Oliver</td>
+<td class="org-left">Cronin</td>
+<td class="org-left">1-450-883-3600 x67866</td>
+<td class="org-left">oliver@gmail.com</td>
+<td class="org-left">GB</td>
+<td class="org-left">SE5 9JW</td>
+<td class="org-right">1</td>
+<td class="org-right">23</td>
+</tr>
+
+<tr>
+<td class="org-left">Olivia</td>
+<td class="org-left">Morissette</td>
+<td class="org-left">818-814-6348 x669</td>
+<td class="org-left">olivia@yahoo.com</td>
+<td class="org-left">GB</td>
+<td class="org-left">W1 9SD</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<a href="https://www.sqlite.org/lang_corefunc.html#substr">SQLite SUBSTR function documentation</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdf3cdb3" class="outline-3">
+<h3 id="orgdf3cdb3">Theory</h3>
+<div class="outline-text-3" id="text-orgdf3cdb3">
+<p>
+DML (Data Manipulation Language) part of SQL
+</p>
+
+<pre class="example">
+INSERT INTO ... VALUES ...
+UPDATE ... SET ... WHERE ...
+DELETE FROM ... WHERE ...
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgd374595" class="outline-3">
+<h3 id="orgd374595">INSERT</h3>
+<div class="outline-text-3" id="text-orgd374595">
+<p>
+Syntax
+</p>
+
+<pre class="example">
+INSERT INTO &lt;table name&gt;
+[ ( &lt;column name&gt; [ { , &lt;column name&gt; } . . . ] ) ]
+VALUES ( &lt;value&gt; [ { , &lt;value&gt; } . . . ] )
+</pre>
+
+<p>
+Example
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">INSERT</span> <span class="org-keyword">INTO</span> hello_worlds
+(hello, world, <span class="org-keyword">language</span>)
+<span class="org-keyword">VALUES</span> (<span class="org-string">'szia'</span>, <span class="org-string">'vil&#225;g'</span>, <span class="org-string">'Hungarian'</span>);
+</pre>
+</div>
+
+<p>
+Practice
+</p>
+
+<p>
+Insert new worker with following details into workers table:
+</p>
+
+<ul class="org-ul">
+<li>first name: James</li>
+<li>last name: Bond</li>
+<li>telephone: 007</li>
+<li>email: james@mi5.co.uk</li>
+<li>country: GB</li>
+<li>postcode: null</li>
+<li>verified: true</li>
+<li>shifts_worked: null</li>
+</ul>
+
+<div class="answer">
+<button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">INSERT</span> <span class="org-keyword">INTO</span> workers
+(first_name, last_name, telephone, email, country,
+postcode, verified, shifts_worked)
+<span class="org-keyword">VALUES</span> (<span class="org-string">'James'</span>, <span class="org-string">'Bond'</span>, <span class="org-string">'007'</span>, <span class="org-string">'james@mi5.co.uk'</span>, <span class="org-string">'GB'</span>, <span class="org-keyword">null</span>, <span class="org-keyword">true</span>, <span class="org-keyword">null</span>)
+</pre>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org17d9c34" class="outline-3">
+<h3 id="org17d9c34">UPDATE</h3>
+<div class="outline-text-3" id="text-org17d9c34">
+<p>
+Syntax
+</p>
+
+<pre class="example">
+UPDATE &lt;table name&gt;
+SET &lt;set clause expression&gt; [ { , &lt;set clause expression&gt; } . . . ]
+[ WHERE &lt;search condition&gt; ]
+</pre>
+
+<p>
+Example
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">UPDATE</span> hello_worlds
+<span class="org-keyword">SET</span> world = <span class="org-string">'mondo'</span>
+<span class="org-keyword">WHERE</span> <span class="org-keyword">language</span> = <span class="org-string">'Italian'</span>;
+</pre>
+</div>
+
+<p>
+Practice
+</p>
+
+<p>
+Unverify all workers living at postcode: <b>SE8 5PA</b>
+</p>
+
+<div class="answer">
+<button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">UPDATE</span> workers
+<span class="org-keyword">SET</span> verified = <span class="org-keyword">false</span>
+<span class="org-keyword">WHERE</span> postcode = <span class="org-string">'SE8 5PA'</span>;
+</pre>
+</div>
+
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org83412ae" class="outline-3">
+<h3 id="org83412ae">DELETE</h3>
+<div class="outline-text-3" id="text-org83412ae">
+<p>
+Syntax
+</p>
+
+<pre class="example">
+DELETE FROM &lt;table name&gt;
+[ WHERE &lt;search condition&gt;
+</pre>
+
+<p>
+Example
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">DELETE</span> <span class="org-keyword">FROM</span> hello_worlds
+<span class="org-keyword">WHERE</span> <span class="org-keyword">language</span> = <span class="org-string">'Spanish'</span>;
+</pre>
+</div>
+
+<p>
+To ensure we delete or update only specif number of rows we can also use the <i>LIMIT</i> clause:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">DELETE</span> <span class="org-keyword">FROM</span> hello_worlds
+<span class="org-keyword">WHERE</span> <span class="org-keyword">language</span> = <span class="org-string">'English'</span>
+<span class="org-keyword">LIMIT</span> 1;
+</pre>
+</div>
+
+<p>
+Practice
+</p>
+
+<p>
+Delete workers whose name is <i>Oliver</i> or did less than 5 shifts.
+</p>
+
+<div class="answer">
+<button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">DELETE</span> workers <span class="org-keyword">WHERE</span> shifts_worked &lt; 5 <span class="org-keyword">OR</span> first_name = <span class="org-string">'Oliver'</span>;
+</pre>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org84075b9" class="outline-3">
+<h3 id="org84075b9">Further reading</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2020-02-06 Thu 03:13</p>
+</div>
+</body>
+</html>
