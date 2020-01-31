@@ -1,0 +1,160 @@
+#+TITLE: INSERT, UPDATE and DELETE
+#+SETUPFILE: ../../theme-bigblow-local.setup
+#+OPTIONS: num:nil
+#+OPTIONS: ^:nil
+#+PROPERTY: header-args:sqlite :db week_3.sqlite :dir db/ :colnames yes :exports code
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/session.css"/>
+#+HTML_HEAD: <script type="text/javascript" src="assets/session.js"></script>
+
+[[./../../index.org][Lunch And Learn SQL in 2020]]
+
+* INSERT, UPDATE and DELETE
+
+  Change is inevitable.
+
+** Start
+
+   After starting sqlite in the main directory as described in [[../../index.html#workshop-instructions][Instructions]], type:
+   #+begin_src sqlite
+   .open sessions/03/db/week_3.sqlite
+   #+end_src
+
+** Theory
+
+   DML (Data Manipulation Language) part of SQL
+
+ #+begin_example
+   INSERT INTO ... VALUES ...
+   UPDATE ... SET ... WHERE ...
+   DELETE FROM ... WHERE ...
+ #+end_example
+
+** INSERT
+
+   Syntax
+
+   #+begin_example
+   INSERT INTO <table name>
+   [ ( <column name> [ { , <column name> } . . . ] ) ]
+   VALUES ( <value> [ { , <value> } . . . ] )
+   #+end_example
+
+   Example
+
+   #+begin_src sqlite
+   INSERT INTO hello_worlds
+   (hello, world, language)
+   VALUES ('szia', 'világ', 'Hungarian');
+   #+end_src
+
+   Practice
+
+   Insert new worker with following details into workers table:
+
+   - first name: James
+   - last name: Bond
+   - telephone: 007
+   - email: james@mi5.co.uk
+   - country: GB
+   - postcode: null
+   - verified: true
+   - shifts_worked: null
+
+   #+begin_export html
+   <div class="answer">
+   <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+   #+end_export
+
+   #+begin_src sqlite
+   INSERT INTO workers
+   (first_name, last_name, telephone, email, country,
+   postcode, verified, shifts_worked)
+   VALUES ('James', 'Bond', '007', 'james@mi5.co.uk', 'GB', null, true, null)
+   #+end_src
+
+   #+begin_export html
+   </div>
+   #+end_export
+
+** UPDATE
+
+   Syntax
+
+   #+begin_example
+   UPDATE <table name>
+   SET <set clause expression> [ { , <set clause expression> } . . . ]
+   [ WHERE <search condition> ]
+   #+end_example
+
+   Example
+
+   #+begin_src sqlite
+   UPDATE hello_worlds
+   SET world = 'mondo'
+   WHERE language = 'Italian';
+   #+end_src
+
+   Practice
+
+   Unverify all workers living at postcode: *SE8 5PA*
+
+   #+begin_export html
+   <div class="answer">
+   <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+   #+end_export
+
+   #+begin_src sqlite
+   UPDATE workers
+   SET verified = false
+   WHERE postcode = 'SE8 5PA';
+   #+end_src
+
+   #+begin_export html
+   </div>
+   #+end_export
+
+
+** DELETE
+
+   Syntax
+
+   #+begin_example
+   DELETE FROM <table name>
+   [ WHERE <search condition>
+   #+end_example
+
+   Example
+
+   #+begin_src sqlite
+   DELETE FROM hello_worlds
+   WHERE language = 'Spanish';
+   #+end_src
+
+   To ensure we delete or update only specif number of rows we can also use the /LIMIT/ clause:
+
+   #+begin_src sqlite
+   DELETE FROM hello_worlds
+   WHERE language = 'English'
+   LIMIT 1;
+   #+end_src
+
+   Practice
+
+   Delete workers whose name is /Oliver/ or did less than 5 shifts.
+
+   #+begin_export html
+   <div class="answer">
+   <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+   #+end_export
+
+   #+begin_src sqlite
+   DELETE workers WHERE shifts_worked < 5 OR first_name = 'Oliver';
+   #+end_src
+
+   #+begin_export html
+   </div>
+   #+end_export
+
+** Excercise
+
+** Further reading
