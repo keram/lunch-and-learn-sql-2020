@@ -1,0 +1,134 @@
+#+TITLE: DATABASE
+#+SETUPFILE: ../../theme-bigblow-local.setup
+#+OPTIONS: num:nil
+#+OPTIONS: ^:nil
+#+PROPERTY: header-args:sqlite :db week_4.sqlite :dir db/ :colnames yes :exports code
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/session.css"/>
+#+HTML_HEAD: <script type="text/javascript" src="assets/session.js"></script>
+
+[[./../../index.org][Lunch And Learn SQL in 2020]]
+
+* DATABASE
+
+  Own castle, own rules.
+
+** Theory
+
+   create database
+   create table
+   column types
+   indexes and constraints
+
+ #+begin_example
+ #+end_example
+
+** CREATE DATABASE
+
+   Syntax
+
+   #+begin_example
+   #+end_example
+
+   Example
+
+   #+begin_src sqlite
+   #+end_src
+
+   Practice
+
+   #+begin_export html
+   <div class="answer">
+   <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+   #+end_export
+
+   #+begin_src sqlite
+   #+end_src
+
+   #+begin_export html
+   </div>
+   #+end_export
+
+** CREATE TABLE
+
+   Syntax
+
+   #+begin_example
+   #+end_example
+
+   Example
+
+   #+begin_src sqlite
+   #+end_src
+
+   Practice
+
+   #+begin_export html
+   <div class="answer">
+   <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+   #+end_export
+
+   #+begin_src sqlite
+   #+end_src
+
+   #+begin_export html
+   </div>
+   #+end_export
+
+** COLUMN TYPES
+
+   Syntax
+
+   #+begin_example
+   #+end_example
+
+   Example
+
+   #+begin_src sqlite
+
+   #+end_src
+
+   #+begin_src sqlite
+   #+end_src
+
+   Practice
+
+   #+begin_export html
+   <div class="answer">
+   <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+   #+end_export
+
+   #+begin_src sqlite
+   #+end_src
+
+   #+begin_export html
+   </div>
+   #+end_export
+
+** INDEXES and CONSTRAINTS
+
+   Syntax
+
+   #+begin_example
+   #+end_example
+
+   Example
+
+   #+begin_src sqlite
+   #+end_src
+
+   Practice
+
+   #+begin_export html
+   <div class="answer">
+   <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
+   #+end_export
+
+   #+begin_src sqlite
+   #+end_src
+
+   #+begin_export html
+   </div>
+   #+end_export
+
+
+** Further reading
