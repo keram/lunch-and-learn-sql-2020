@@ -15,7 +15,7 @@
 ** Start
 
    After starting sqlite in the main directory as described in [[../../index.html#workshop-instructions][Instructions]], type:
-   #+begin_src sqlite
+   #+begin_src sqlite :tangle sql/03-start.sql
    .open sessions/03/db/week_3.sqlite
    #+end_src
 
@@ -41,7 +41,7 @@
 
    Example
 
-   #+begin_src sqlite
+   #+begin_src sqlite :tangle sql/03-insert.sql
    INSERT INTO hello_worlds
    (hello, world, language)
    VALUES ('szia', 'világ', 'Hungarian');
@@ -65,7 +65,7 @@
    <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
    #+end_export
 
-   #+begin_src sqlite
+   #+begin_src sqlite :tangle sql/03-insert-answer.sql
    INSERT INTO workers
    (first_name, last_name, telephone, email, country,
    postcode, verified, shifts_worked)
@@ -88,7 +88,7 @@
 
    Example
 
-   #+begin_src sqlite
+   #+begin_src sqlite :tangle sql/03-update.sql
    UPDATE hello_worlds
    SET world = 'mondo'
    WHERE language = 'Italian';
@@ -103,7 +103,7 @@
    <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
    #+end_export
 
-   #+begin_src sqlite
+   #+begin_src sqlite :tangle sql/03-update-answer.sql
    UPDATE workers
    SET verified = false
    WHERE postcode = 'SE8 5PA';
@@ -125,14 +125,14 @@
 
    Example
 
-   #+begin_src sqlite
+   #+begin_src sqlite :tangle sql/03-delete.sql
    DELETE FROM hello_worlds
    WHERE language = 'Spanish';
    #+end_src
 
    To ensure we delete or update only specif number of rows we can also use the /LIMIT/ clause:
 
-   #+begin_src sqlite
+   #+begin_src sqlite :tangle sql/03-delete-1.sql
    DELETE FROM hello_worlds
    WHERE language = 'English'
    LIMIT 1;
@@ -147,14 +147,12 @@
    <button>Toggle Answer</button> Please, try it yourself first before revealing the answer.
    #+end_export
 
-   #+begin_src sqlite
+   #+begin_src sqlite :tangle sql/03-delete-answer.sql
    DELETE workers WHERE shifts_worked < 5 OR first_name = 'Oliver';
    #+end_src
 
    #+begin_export html
    </div>
    #+end_export
-
-** Excercise
 
 ** Further reading
