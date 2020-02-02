@@ -25,19 +25,19 @@
 
   - [[./sessions/03/03-insert-update-and-delete.org][Week 3: INSERT, UPDATE and DELETE]]
 
-    Change is inevitable
+    Change is inevitable.
 
     [[./export/03.zip][Download]]
 
   - [[./sessions/04/04-select-part2.org][Week 4: SELECT part 2]]
 
-    Joins, grouping and extra filtering.
+    Together stronger we are.
 
     [[./export/04.zip][Download]]
 
   - [[./sessions/05/05-database.org][Week 5: DATABASE]]
 
-    Creating own data model, decomposition.
+    Own castle, own rules.
 
     [[./export/05.zip][Download]]
 
@@ -74,7 +74,13 @@
   :CUSTOM_ID: workshop-instructions
   :END:
 
-  - Download the workshop from download section.
+  - Download the [[https://github.com/keram/lunch-and-learn-sql-2020/releases/latest][latest version of workshop (Source code)]] from Github.
+
+   #+begin_center
+   #+ATTR_HTML: :alt Screenshot of download page on github :width 40%
+   [[file:assets/download.png][file:assets/download.png]]
+   (Click on the image for full size)
+   #+end_center
 
 ** macOS - OSX
 
@@ -143,6 +149,6 @@
   :CUSTOM_ID: workshop-download
   :END:
 
-** Latest release
+** Latest workshop materials
 
    https://github.com/keram/lunch-and-learn-sql-2020/releases/latest
