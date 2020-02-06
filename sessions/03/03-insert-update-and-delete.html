@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-02-06 Thu 03:13 -->
+<!-- 2020-02-06 Thu 05:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>INSERT, UPDATE and DELETE</title>
@@ -259,15 +259,23 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org02c239c">INSERT, UPDATE and DELETE</a>
+<li><a href="#org807707d">INSERT, UPDATE and DELETE</a>
 <ul>
-<li><a href="#orgeaf194d">Start</a></li>
-<li><a href="#orgcea3d01">Refresh</a></li>
-<li><a href="#orgdf3cdb3">Theory</a></li>
-<li><a href="#orgd374595">INSERT</a></li>
-<li><a href="#org17d9c34">UPDATE</a></li>
-<li><a href="#org83412ae">DELETE</a></li>
-<li><a href="#org84075b9">Further reading</a></li>
+<li><a href="#org147e3cc">Start</a></li>
+<li><a href="#org5c5ef3d">Refresh</a></li>
+<li><a href="#orge3ec8ba">Theory</a></li>
+<li><a href="#org0de4069">INSERT</a>
+<ul>
+<li><a href="#orga3942ef">Importing csv into SQLite table</a></li>
+</ul>
+</li>
+<li><a href="#org90cc121">UPDATE</a></li>
+<li><a href="#org2b40038">DELETE</a>
+<ul>
+<li><a href="#orgfbd59dd">Combining DELETE (UPDATE) with SELECT</a></li>
+</ul>
+</li>
+<li><a href="#org9808a0e">Further reading</a></li>
 </ul>
 </li>
 </ul>
@@ -277,17 +285,17 @@ for the JavaScript code in this tag.
 <a href="./../../index.html">Lunch And Learn SQL in 2020</a>
 </p>
 
-<div id="outline-container-org02c239c" class="outline-2">
-<h2 id="org02c239c">INSERT, UPDATE and DELETE</h2>
-<div class="outline-text-2" id="text-org02c239c">
+<div id="outline-container-org807707d" class="outline-2">
+<h2 id="org807707d">INSERT, UPDATE and DELETE</h2>
+<div class="outline-text-2" id="text-org807707d">
 <p>
 Change is inevitable.
 </p>
 </div>
 
-<div id="outline-container-orgeaf194d" class="outline-3">
-<h3 id="orgeaf194d">Start</h3>
-<div class="outline-text-3" id="text-orgeaf194d">
+<div id="outline-container-org147e3cc" class="outline-3">
+<h3 id="org147e3cc">Start</h3>
+<div class="outline-text-3" id="text-org147e3cc">
 <p>
 <b>Existing students:</b>
 </p>
@@ -303,7 +311,6 @@ unpack it into <i>sessions/03</i> directory in previously downloaded project rel
 (Click on the image for full size)
 </p>
 </div>
-
 
 <p>
 <b>New students:</b>
@@ -324,12 +331,21 @@ After starting sqlite in the main directory as described in <a href="../../index
 <pre class="src src-sqlite">.<span class="org-keyword">open</span> sessions/03/db/week_3.sqlite
 </pre>
 </div>
+
+<p>
+Turn on headers and column mode in sqlite console:
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite">.mode <span class="org-keyword">column</span>
+.header <span class="org-keyword">on</span>
+</pre>
+</div>
 </div>
 </div>
 
-<div id="outline-container-orgcea3d01" class="outline-3">
-<h3 id="orgcea3d01">Refresh</h3>
-<div class="outline-text-3" id="text-orgcea3d01">
+<div id="outline-container-org5c5ef3d" class="outline-3">
+<h3 id="org5c5ef3d">Refresh</h3>
+<div class="outline-text-3" id="text-org5c5ef3d">
 <p>
 Last time we looked how to retrieve data from existing table and filter them based on specific criteria.
 (We used command <code>.tables</code> to see list of tables in our database.)
@@ -462,9 +478,9 @@ As example to get workers whose first name starts with capital <i>O</i> we can w
 </div>
 </div>
 
-<div id="outline-container-orgdf3cdb3" class="outline-3">
-<h3 id="orgdf3cdb3">Theory</h3>
-<div class="outline-text-3" id="text-orgdf3cdb3">
+<div id="outline-container-orge3ec8ba" class="outline-3">
+<h3 id="orge3ec8ba">Theory</h3>
+<div class="outline-text-3" id="text-orge3ec8ba">
 <p>
 DML (Data Manipulation Language) part of SQL
 </p>
@@ -477,9 +493,9 @@ DELETE FROM ... WHERE ...
 </div>
 </div>
 
-<div id="outline-container-orgd374595" class="outline-3">
-<h3 id="orgd374595">INSERT</h3>
-<div class="outline-text-3" id="text-orgd374595">
+<div id="outline-container-org0de4069" class="outline-3">
+<h3 id="org0de4069">INSERT</h3>
+<div class="outline-text-3" id="text-org0de4069">
 <p>
 Syntax
 </p>
@@ -494,6 +510,9 @@ VALUES ( &lt;value&gt; [ { , &lt;value&gt; } . . . ] )
 Example
 </p>
 
+<p>
+Inserting new item into hello worlds table.
+</p>
 <div class="org-src-container">
 <pre class="src src-sqlite"><span class="org-keyword">INSERT</span> <span class="org-keyword">INTO</span> hello_worlds
 (hello, world, <span class="org-keyword">language</span>)
@@ -533,11 +552,39 @@ postcode, verified, shifts_worked)
 
 </div>
 </div>
+
+<div id="outline-container-orga3942ef" class="outline-4">
+<h4 id="orga3942ef">Importing csv into SQLite table</h4>
+<div class="outline-text-4" id="text-orga3942ef">
+<p>
+When we have csv with columns matching columns in our table we can quickly insert rows by importing the csv:
+</p>
+
+<ul class="org-ul">
+<li>Switching to <i>csv</i> mode <code>.mode csv</code></li>
+<li>Importing the data <code>.import path_to_csv_file</code></li>
+<li>Switch back to <i>column</i> (presentation) mode <code>.mode column</code></li>
+</ul>
+
+<p>
+Example
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">.mode csv
+.import sessions/03/db/import-workers.csv workers
+.mode <span class="org-keyword">column</span>
+<span class="org-comment">-- check last 5 (imported) records</span>
+<span class="org-keyword">SELECT</span> * <span class="org-keyword">FROM</span> workers <span class="org-keyword">LIMIT</span> 5 OFFSET 20;
+</pre>
+</div>
+</div>
+</div>
 </div>
 
-<div id="outline-container-org17d9c34" class="outline-3">
-<h3 id="org17d9c34">UPDATE</h3>
-<div class="outline-text-3" id="text-org17d9c34">
+<div id="outline-container-org90cc121" class="outline-3">
+<h3 id="org90cc121">UPDATE</h3>
+<div class="outline-text-3" id="text-org90cc121">
 <p>
 Syntax
 </p>
@@ -552,6 +599,9 @@ SET &lt;set clause expression&gt; [ { , &lt;set clause expression&gt; } . . . ]
 Example
 </p>
 
+<p>
+Updating existing hello world row.
+</p>
 <div class="org-src-container">
 <pre class="src src-sqlite"><span class="org-keyword">UPDATE</span> hello_worlds
 <span class="org-keyword">SET</span> world = <span class="org-string">'mondo'</span>
@@ -578,13 +628,21 @@ Unverify all workers living at postcode: <b>SE8 5PA</b>
 </div>
 
 </div>
+
+<p>
+To check if our update was successful we can use good old select:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> <span class="org-builtin">COUNT</span>(*) <span class="org-keyword">FROM</span> workers <span class="org-keyword">WHERE</span> postcode = <span class="org-string">'SE8 5PA'</span> <span class="org-keyword">AND</span> verified = <span class="org-keyword">true</span>;
+</pre>
+</div>
 </div>
 </div>
 
-
-<div id="outline-container-org83412ae" class="outline-3">
-<h3 id="org83412ae">DELETE</h3>
-<div class="outline-text-3" id="text-org83412ae">
+<div id="outline-container-org2b40038" class="outline-3">
+<h3 id="org2b40038">DELETE</h3>
+<div class="outline-text-3" id="text-org2b40038">
 <p>
 Syntax
 </p>
@@ -633,15 +691,53 @@ Delete workers whose name is <i>Oliver</i> or did less than 5 shifts.
 
 </div>
 </div>
+
+<div id="outline-container-orgfbd59dd" class="outline-4">
+<h4 id="orgfbd59dd">Combining DELETE (UPDATE) with SELECT</h4>
+<div class="outline-text-4" id="text-orgfbd59dd">
+<p>
+One of the good examples of power of SQL language is ability combine different type of statements.
+For example if we had two tables representing workers and worker's shifts and we would like to delete
+unverified workers workers shifts we could write something like this:
+</p>
+
+<pre class="example">
+DELETE FROM worker_shifts
+WHERE worker_id IN (SELECT worker_id FROM workers WHERE verified = false)
+</pre>
+</div>
+</div>
 </div>
 
-<div id="outline-container-org84075b9" class="outline-3">
-<h3 id="org84075b9">Further reading</h3>
+<div id="outline-container-org9808a0e" class="outline-3">
+<h3 id="org9808a0e">Further reading</h3>
+<div class="outline-text-3" id="text-org9808a0e">
+<p>
+Wikipedia
+</p>
+
+<ul class="org-ul">
+<li><a href="https://en.wikipedia.org/wiki/Insert_(SQL)">https://en.wikipedia.org/wiki/Insert_(SQL)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Update_(SQL)">https://en.wikipedia.org/wiki/Update_(SQL)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Delete_(SQL)">https://en.wikipedia.org/wiki/Delete_(SQL)</a></li>
+</ul>
+
+<p>
+Official SQLite manual
+</p>
+
+<ul class="org-ul">
+<li><a href="https://sqlite.org/lang_insert.html">https://sqlite.org/lang_insert.html</a></li>
+<li><a href="https://sqlite.org/lang_update.html">https://sqlite.org/lang_update.html</a></li>
+<li><a href="https://sqlite.org/lang_delete.html">https://sqlite.org/lang_delete.html</a></li>
+<li><a href="https://sqlite.org/lang_replace.html">https://sqlite.org/lang_replace.html</a></li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2020-02-06 Thu 03:13</p>
+<p class="date">Created: 2020-02-06 Thu 05:15</p>
 </div>
 </body>
 </html>

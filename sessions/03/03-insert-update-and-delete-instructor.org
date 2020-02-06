@@ -62,12 +62,26 @@
   #+begin_src ruby :results output
   require 'faker'
 
+  20.times do
+    puts Faker::Name.first_name
+  end
+
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+
+  #+end_example
+
+
+#+begin_src ruby :results output
+  require 'faker'
+
   post_codes = ['LS25 3AX', 'W1 9SD', 'TF1 1JA', 'SE18 6EY', 'SE8 5PA', 'SE5 9JW']
   countries = (['GB'] * 5) + (['US'] * 3) + (['NZ'] * 2) + ['AU']
 
-  first_names = %w(Oliver  George  Harry   Jack) +
-                %w(Olivia   Emily   Amelia  Jessica  Lucy  Charlotte)
-  20.times do
+  first_names = %w(Alfonso Belle Ami Marcel Scotty Jarvis Elmo Leona)
+  10.times do
     first_name = first_names.sample
     row = [
       first_name,
@@ -82,29 +96,68 @@
   end
 
   #+end_src
+#+begin_src ruby
+shifts = Array.new(10) { rand(0...30) }
+#+end_src
+
+#+RESULTS:
+| 6 | 22 | 12 | 9 | 4 | 8 | 15 | 0 | 5 | 27 |
+
+#+begin_src ruby :results output
+require 'faker'
+
+shifts = Array.new(10) { rand(0...30) }
+5.times do
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name,
+  row = [
+    first_name,
+    last_name,
+    Faker::PhoneNumber.phone_number,
+    Faker::Internet.free_email(name: "#{first_name}.#{last_name}"),
+    Faker::Address.country_code,
+    Faker::Address.postcode,
+    shifts.sample
+  ].join("', '")
+
+  puts "('#{row}'),"
+end
+
+  #+end_src
+
+  #+RESULTS:
+
+  # first_name VARCHAR(32),
+  # last_name VARCHAR(32),
+  # telephone VARCHAR(16),
+  # email VARCHAR,
+  # country VARCHAR(6),
+  # postcode VARCHAR(12),
+  # verified BOOLEAN,
+  # shifts_worked INTEGER
 
   #+RESULTS:
   #+begin_example
-  ('Charlotte', 'Crona', '(358) 543-3871 x11661', 'charlotte@gmail.com', 'US', 'LS25 3AX'),
-  ('Oliver', 'Frami', '123-049-9312 x75410', 'oliver@hotmail.com', 'US', 'LS25 3AX'),
-  ('George', 'Miller', '1-829-690-4711 x64244', 'george@gmail.com', 'US', 'LS25 3AX'),
-  ('Emily', 'Nolan', '112-723-3906 x35944', 'emily@yahoo.com', 'NZ', 'LS25 3AX'),
-  ('Oliver', 'Huel', '231-680-6707 x3907', 'oliver@yahoo.com', 'NZ', 'SE8 5PA'),
-  ('Olivia', 'Bayer', '539.597.3784 x971', 'olivia@yahoo.com', 'GB', 'LS25 3AX'),
-  ('Amelia', 'Ziemann', '439.776.0760 x16370', 'amelia@gmail.com', 'GB', 'TF1 1JA'),
-  ('Harry', 'Weissnat', '287.861.7897 x723', 'harry@gmail.com', 'GB', 'SE18 6EY'),
-  ('Emily', 'Stamm', '1-442-456-4126 x6543', 'emily@yahoo.com', 'AU', 'LS25 3AX'),
-  ('Lucy', 'Lueilwitz', '(972) 434-9145', 'lucy@yahoo.com', 'US', 'SE18 6EY'),
-  ('Amelia', 'Mertz', '(949) 299-5810 x72377', 'amelia@gmail.com', 'GB', 'SE8 5PA'),
-  ('Lucy', 'Hintz', '728.939.5077', 'lucy@yahoo.com', 'NZ', 'LS25 3AX'),
-  ('Oliver', 'Kuhic', '798-471-9536 x56285', 'oliver@gmail.com', 'US', 'TF1 1JA'),
-  ('Jessica', 'Berge', '(923) 444-5956 x64054', 'jessica@yahoo.com', 'US', 'TF1 1JA'),
-  ('George', 'Pouros', '1-546-234-2587 x3500', 'george@gmail.com', 'AU', 'W1 9SD'),
-  ('Olivia', 'Kling', '592-680-6368 x47550', 'olivia@gmail.com', 'US', 'TF1 1JA'),
-  ('Charlotte', 'Roob', '651-713-8277 x371', 'charlotte@hotmail.com', 'US', 'SE8 5PA'),
-  ('Oliver', 'Cronin', '1-450-883-3600 x67866', 'oliver@gmail.com', 'GB', 'SE5 9JW'),
-  ('Olivia', 'Morissette', '818-814-6348 x669', 'olivia@yahoo.com', 'GB', 'W1 9SD'),
-  ('Jessica', 'Romaguera', '(150) 964-5686 x2614', 'jessica@yahoo.com', 'US', 'SE8 5PA'),
+  ('Amelia', 'Collins', '634-672-5717 x722', 'amelia@gmail.com', 'GB', 'SE18 6EY'),
+  ('Olivia', 'Bernhard', '955-119-5529', 'olivia@yahoo.com', 'AU', 'SE5 9JW'),
+  ('Olivia', 'Fritsch', '476.674.6020 x55127', 'olivia@gmail.com', 'GB', 'SE8 5PA'),
+  ('Charlotte', 'Stiedemann', '(876) 411-1610 x761', 'charlotte@gmail.com', 'NZ', 'LS25 3AX'),
+  ('Jessica', 'Hamill', '1-654-620-8991', 'jessica@yahoo.com', 'US', 'SE18 6EY'),
+  ('Amelia', 'Murphy', '1-809-235-6165 x318', 'amelia@hotmail.com', 'NZ', 'SE18 6EY'),
+  ('Charlotte', 'King', '1-746-090-2961', 'charlotte@hotmail.com', 'AU', 'SE5 9JW'),
+  ('George', 'Cummings', '1-985-391-8895 x527', 'george@hotmail.com', 'AU', 'SE18 6EY'),
+  ('Charlotte', 'Quigley', '(767) 760-7950', 'charlotte@yahoo.com', 'GB', 'TF1 1JA'),
+  ('Emily', 'Torphy', '1-320-430-0338 x3403', 'emily@yahoo.com', 'GB', 'SE8 5PA'),
+  ('Charlotte', 'Ruecker', '(211) 067-5824 x882', 'charlotte@hotmail.com', 'US', 'W1 9SD'),
+  ('Lucy', 'Mueller', '1-406-654-5625 x7126', 'lucy@hotmail.com', 'NZ', 'W1 9SD'),
+  ('Harry', 'Lueilwitz', '813.631.0645 x996', 'harry@yahoo.com', 'US', 'TF1 1JA'),
+  ('George', 'Hermann', '247-129-9119', 'george@hotmail.com', 'GB', 'SE18 6EY'),
+  ('Amelia', 'Jerde', '(700) 756-1117 x8720', 'amelia@gmail.com', 'US', 'LS25 3AX'),
+  ('Charlotte', 'Rosenbaum', '1-518-416-0620 x5139', 'charlotte@yahoo.com', 'US', 'LS25 3AX'),
+  ('Olivia', 'McCullough', '1-930-712-9519', 'olivia@yahoo.com', 'NZ', 'SE8 5PA'),
+  ('Harry', 'Grady', '600.322.7599 x695', 'harry@gmail.com', 'NZ', 'SE8 5PA'),
+  ('Lucy', 'Rath', '(214) 256-7180 x4200', 'lucy@hotmail.com', 'GB', 'TF1 1JA'),
+  ('Amelia', 'Boyer', '(848) 415-8518 x6443', 'amelia@hotmail.com', 'GB', 'W1 9SD'),
   #+end_example
 
   Create workers
