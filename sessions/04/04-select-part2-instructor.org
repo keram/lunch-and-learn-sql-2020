@@ -1,0 +1,142 @@
+* SQLite
+  #+PROPERTY: header-args:sqlite :db week_4.sqlite :dir db/
+
+  #+begin_src sqlite :exports none
+delete from  books;
+vacuum;
+  #+end_src
+
+  #+begin_src sqlite :exports none
+
+  #+end_src
+
+  #+RESULTS:
+
+  #+begin_src sqlite
+  .tables
+  #+end_src
+
+  #+RESULTS:
+  : authors         books           borrowed_books  users
+
+#+begin_src sqlite
+DROP TABLE IF EXISTS books;
+CREATE TABLE books(
+id INTEGER primary key,
+author_id INTEGER,
+title VARCHAR);
+CREATE UNIQUE INDEX book_author_name_idx ON books (author_id, title);
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE users(
+id INTEGER primary key,
+name VARCHAR);
+
+DROP TABLE IF EXISTS borrowed_books;
+CREATE TABLE borrowed_books(
+book_id INTEGER,
+user_id INTEGER,
+borrowed_at DATETIME,
+returned_at DATETIME);
+
+DROP TABLE IF EXISTS authors;
+CREATE TABLE authors(
+id INTEGER primary key,
+name VARCHAR);
+CREATE UNIQUE INDEX author_name_idx ON authors (name);
+#+end_src
+
+#+RESULTS:
+
+#+begin_src ruby :results output
+require 'faker'
+
+10.times do
+  puts Faker::Name.name
+end
+
+#+end_src
+
+#+RESULTS:
+
+#+begin_src sqlite
+delete from users;
+INSERT INTO users (name) VALUES
+('Ambrose Kassulke'),
+('Gail Keebler'),
+('Elliot Hauck'),
+('Donna Hansen'),
+('Jolanda Ward'),
+('Virgina Schuppe');
+
+delete from authors;
+ INSERT INTO authors (name) VALUES
+('George Orwell'),
+('Ray Bradbury'),
+('Douglas Adams'),
+('Frank Herbert'),
+('Isaac Asimov'),
+('Aldous Huxley'),
+('Philip K. Dick'),
+('Margaret Atwood');
+
+delete from books;
+ INSERT INTO books (title, author_id) VALUES
+('1984', 1),
+('Fahrenheit 451', 2),
+("The Hitchhiker's Guide to the Galaxy", 3),
+('Dune', 4),
+('The Foundation Trilogy', 5);
+  #+end_src
+
+  #+RESULTS:
+
+#+begin_src sqlite
+SELECT books.title AS title, authors.name AS Author FROM books JOIN authors ON books.author_id = authors.id;
+#+end_src
+
+#+RESULTS:
+| 1984                                 | George Orwell |
+| Fahrenheit 451                       | Ray Bradbury  |
+| The Hitchhiker's Guide to the Galaxy | Douglas Adams |
+| Dune                                 | Frank Herbert |
+| The Foundation Trilogy               | Isaac Asimov  |
+
+
+  Brave New World
+Aldous Huxley
+
+  Do Androids Dream of Electric Sheep?
+Philip K. Dick
+
+  The Handmaid's Tale
+Margaret Atwood
+
+
+  #+begin_src sqlite
+  #+end_src
+
+  #+RESULTS:
+
+#+begin_src sqlite
+SELECT 'a', 'b'
+UNION
+SELECT 'c', 'd';
+#+end_src
+
+#+RESULTS:
+| a | b |
+| c | d |
+
+#+begin_src sqlite
+SELECT * FROM
+ (SELECT 'a', 1 UNION SELECT 'b', 2)
+CROSS JOIN
+(SELECT 'c', 3 UNION SELECT 'd', 4)
+#+end_src
+
+#+RESULTS:
+| a | 1 | c | 3 |
+| a | 1 | d | 4 |
+| b | 2 | c | 3 |
+| b | 2 | d | 4 |

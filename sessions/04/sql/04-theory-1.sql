@@ -1,0 +1,1 @@
+SELECT * FROM authors ORDER BY id DESC LIMIT 1;

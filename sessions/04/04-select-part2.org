@@ -1,0 +1,201 @@
+#+TITLE: SELECT part 2
+#+SETUPFILE: ../../theme-bigblow-local.setup
+#+OPTIONS: num:nil
+#+OPTIONS: ^:nil
+#+PROPERTY: header-args:sqlite :db week_4.sqlite :dir db/ :colnames yes :exports code
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/session.css"/>
+#+HTML_HEAD: <script type="text/javascript" src="assets/session.js"></script>
+
+[[./../../index.org][Lunch And Learn SQL in 2020]]
+
+* SELECT part 2
+
+  Together, stronger we are.
+
+** Start
+
+   After starting sqlite in the main directory as described in [[../../index.html#workshop-instructions][Instructions]], type:
+   #+begin_src sqlite :tangle sql/04-start.sql
+   .open sessions/04/db/week_4.sqlite
+   #+end_src
+
+** Theory
+
+*** Keys and Indices
+
+In order to safely and unambiguesly reference rows in table we use keys.
+In SQL we work mainly with three types of keys:
+
+- PRIMARY KEY
+  - cannot be empty
+  - must be unique within the entire table.
+  - is created when a new row of data is inserted.
+  - once created, a primary key should not be changed.
+
+In real world it is usually the ID column auto incremented for every new row in table.
+
+Quiz question: Which company ID is /29985/?
+
+   #+begin_src sqlite :tangle sql/04-theory-1.sql
+    SELECT * FROM authors ORDER BY id DESC LIMIT 1;
+   #+end_src
+
+   #+begin_src sqlite :tangle sql/04-theory-2.sql
+    INSERT INTO authors (name) VALUES ('Neal Stephenson');
+   #+end_src
+
+- /UNIQUE KEY/
+
+   #+begin_src sqlite :tangle sql/04-theory-3.sql
+    INSERT INTO books (author_id, title) VALUES (1, '1984');
+   #+end_src
+
+- FOREIGN KEY
+
+  - primary key in one table used in second table to refer row in the first.
+
+*** Join
+
+# source: sql.a.beginners.guide.3rd.ed.[oppel.&.sheldon.2008.08.29]
+#+begin_quote
+A join is an operation that matches rows in one table with rows in another so that columns
+from both tables may be placed side by side in the query results as if they all came from a
+single table.
+#+end_quote
+
+   #+begin_center
+   [[file:assets/sheets_join.PNG][file:assets/sheets_join.PNG]]
+   (Click on the image for full size)
+   #+end_center
+
+ -  INNER JOIN
+ -  LEFT OUTER JOIN
+ -  RIGHT OUTER JOIN
+ -  FULL JOIN
+ -  CROSS JOIN
+ -  UNION
+
+** INNER JOIN
+
+Return only rows from table A and B if table A has corresponding column in table B;
+
+Give me authors and their books we have in our library
+   #+begin_src sqlite :tangle sql/04-inner-join.sql
+SELECT authors.name AS Author, books.title AS Book FROM books JOIN authors ON books.author_id = authors.id;
+   #+end_src
+
+   #+RESULTS:
+   | Author        | Book                                 |
+   |---------------+--------------------------------------|
+   | George Orwell | 1984                                 |
+   | Ray Bradbury  | Fahrenheit 451                       |
+   | Douglas Adams | The Hitchhiker's Guide to the Galaxy |
+   | Frank Herbert | Dune                                 |
+   | Isaac Asimov  | The Foundation Trilogy               |
+
+** LEFT OUTER JOIN
+
+Return joined rows from table A and B and for missing rows in table B return null in columns
+
+Give me all authors by name and return also book title if it is in our library.
+   #+begin_src sqlite :tangle sql/04-left-outer-join.sql
+     SELECT authors.name AS Author, books.title as Book FROM authors LEFT JOIN books ON authors.id =  books.author_id;
+   #+end_src
+
+   #+RESULTS:
+   | Author          | Book                                 |
+   |-----------------+--------------------------------------|
+   | George Orwell   | 1984                                 |
+   | Ray Bradbury    | Fahrenheit 451                       |
+   | Douglas Adams   | The Hitchhiker's Guide to the Galaxy |
+   | Frank Herbert   | Dune                                 |
+   | Isaac Asimov    | The Foundation Trilogy               |
+   | Aldous Huxley   |                                      |
+   | Philip K. Dick  |                                      |
+   | Margaret Atwood |                                      |
+
+** RIGHT OUTER JOIN
+
+RIGHT and FULL OUTER JOINs are not currently supported
+
+** FULL JOIN
+
+** CROSS JOIN
+
+Return all combinations of authors and books in our library
+   #+begin_src sqlite :tangle sql/04-cross-join.sql
+SELECT authors.name AS Author, books.title as Book FROM authors CROSS JOIN books;
+   #+end_src
+
+   #+RESULTS:
+   | Author          | Book                                 |
+   |-----------------+--------------------------------------|
+   | George Orwell   | 1984                                 |
+   | George Orwell   | Fahrenheit 451                       |
+   | George Orwell   | The Hitchhiker's Guide to the Galaxy |
+   | George Orwell   | Dune                                 |
+   | George Orwell   | The Foundation Trilogy               |
+   | Ray Bradbury    | 1984                                 |
+   | Ray Bradbury    | Fahrenheit 451                       |
+   | Ray Bradbury    | The Hitchhiker's Guide to the Galaxy |
+   | Ray Bradbury    | Dune                                 |
+   | Ray Bradbury    | The Foundation Trilogy               |
+   | Douglas Adams   | 1984                                 |
+   | Douglas Adams   | Fahrenheit 451                       |
+   | Douglas Adams   | The Hitchhiker's Guide to the Galaxy |
+   | Douglas Adams   | Dune                                 |
+   | Douglas Adams   | The Foundation Trilogy               |
+   | Frank Herbert   | 1984                                 |
+   | Frank Herbert   | Fahrenheit 451                       |
+   | Frank Herbert   | The Hitchhiker's Guide to the Galaxy |
+   | Frank Herbert   | Dune                                 |
+   | Frank Herbert   | The Foundation Trilogy               |
+   | Isaac Asimov    | 1984                                 |
+   | Isaac Asimov    | Fahrenheit 451                       |
+   | Isaac Asimov    | The Hitchhiker's Guide to the Galaxy |
+   | Isaac Asimov    | Dune                                 |
+   | Isaac Asimov    | The Foundation Trilogy               |
+   | Aldous Huxley   | 1984                                 |
+   | Aldous Huxley   | Fahrenheit 451                       |
+   | Aldous Huxley   | The Hitchhiker's Guide to the Galaxy |
+   | Aldous Huxley   | Dune                                 |
+   | Aldous Huxley   | The Foundation Trilogy               |
+   | Philip K. Dick  | 1984                                 |
+   | Philip K. Dick  | Fahrenheit 451                       |
+   | Philip K. Dick  | The Hitchhiker's Guide to the Galaxy |
+   | Philip K. Dick  | Dune                                 |
+   | Philip K. Dick  | The Foundation Trilogy               |
+   | Margaret Atwood | 1984                                 |
+   | Margaret Atwood | Fahrenheit 451                       |
+   | Margaret Atwood | The Hitchhiker's Guide to the Galaxy |
+   | Margaret Atwood | Dune                                 |
+   | Margaret Atwood | The Foundation Trilogy               |
+
+** UNION
+
+   #+begin_src sqlite :tangle sql/04-cross-join.sql
+SELECT authors.name FROM authors
+UNION
+SELECT books.title FROM books;
+   #+end_src
+
+   #+RESULTS:
+   | name                                 |
+   |--------------------------------------|
+   | 1984                                 |
+   | Aldous Huxley                        |
+   | Douglas Adams                        |
+   | Dune                                 |
+   | Fahrenheit 451                       |
+   | Frank Herbert                        |
+   | George Orwell                        |
+   | Isaac Asimov                         |
+   | Margaret Atwood                      |
+   | Philip K. Dick                       |
+   | Ray Bradbury                         |
+   | The Foundation Trilogy               |
+   | The Hitchhiker's Guide to the Galaxy |
+
+** Further reading
+
+https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/
