@@ -61,4 +61,65 @@
 |  coll IS NOT NULL  |                                        |
 +--------------------+----------------------------------------+
 
-** SQL Datatypes
+# ** SQL Datatypes
+
+   #+begin_export html
+   <div class="page-break">&nbsp;</div>
+   #+end_export
+
+** SQLite Commands
++------------------------------+---------------------------------------------------------------------+
+| .open database/file          | Open existing or create new SQLite database                         |
++------------------------------+---------------------------------------------------------------------+
+| .tables                      | List of tables in current databases                                 |
++------------------------------+---------------------------------------------------------------------+
+| .mode column                 | Display output in terminal in left align columns (human nice)       |
++------------------------------+---------------------------------------------------------------------+
+| .mode csv                    | Display output in terminal as comma separated columns (default)     |
++------------------------------+---------------------------------------------------------------------+
+| .header on/off               | Turn display of headers on or off                                   |
++------------------------------+---------------------------------------------------------------------+
+| .schema (table_name)         | Show the CREATE statements for a database or table.                 |
+|                              | Display table columns and their datatypes.                          |
++------------------------------+---------------------------------------------------------------------+
+| .indexes (table_name)        | Show names of indexes.                                              |
+|                              | If name of table provided show indices only for the specific table. |
++------------------------------+---------------------------------------------------------------------+
+| .help (command_name)         | Display list of all available commands with description.            |
+|                              | If command name provided shows help for the command                 |
++------------------------------+---------------------------------------------------------------------+
+| .shell CMD ARGS...           | Run CMD ARGS... in a system shell                                   |
++------------------------------+---------------------------------------------------------------------+
+
+** Shell Commands
++---------------------------------+----------------------------------+
+| sqlite3                         | Start SQLite                     |
++---------------------------------+----------------------------------+
+| sqlite3 -header -column db/file | .. in column mode with header on |
+|                                 | and open database in path        |
++---------------------------------+----------------------------------+
+
+** SQL Comparison Operators
++--------------------+-------------------------------+--------+
+|         =          | Equals                        | 2 = 2  |
++--------------------+-------------------------------+--------+
+|         >          | Greater than                  | 2 > 1  |
++--------------------+-------------------------------+--------+
+|         <          | Less than                     | 2 < 3  |
++--------------------+-------------------------------+--------+
+|         <=         | Less than or equal to         | 2 <= 2 |
++--------------------+-------------------------------+--------+
+|         >=         | Greater than or equal to      | 3 >= 2 |
++--------------------+-------------------------------+--------+
+|         <>         | Not equal to                  | 2 <> 3 |
++--------------------+-------------------------------+--------+
+|         !=         | Not equal to (non standard)            |
++--------------------+----------------------------------------+
+|  coll = NULL       | Invalid comparison                     |
+|  coll != NULL      |                                        |
++--------------------+----------------------------------------+
+|  coll IS NULL      | Valid                                  |
+|  coll IS NOT NULL  |                                        |
++--------------------+----------------------------------------+
+
+# ** SQL Datatypes

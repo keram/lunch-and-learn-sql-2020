@@ -1,5 +1,6 @@
 table {
   border: solid 1px #eee;
+  min-width: 460px;
 }
 
 td {
@@ -13,4 +14,9 @@ tr {
 h2 {
   font-size: 1em;
   margin-bottom: 0.25em;
+  color: #555;
+}
+
+@media print {
+  .page-break {page-break-after: always;}
 }
