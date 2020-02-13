@@ -1,0 +1,16 @@
+table {
+  border: solid 1px #eee;
+}
+
+td {
+  border: solid 1px #eee;
+}
+
+tr {
+  border: none;
+}
+
+h2 {
+  font-size: 1em;
+  margin-bottom: 0.25em;
+}
