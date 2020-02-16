@@ -1,0 +1,6 @@
+* SQLite
+  #+PROPERTY: header-args:sqlite :db week_5.sqlite :dir db/
+
+  #+begin_src sqlite
+  .open week_5.sqlite -- create file(database) week_5.sqlite
+  #+end_src

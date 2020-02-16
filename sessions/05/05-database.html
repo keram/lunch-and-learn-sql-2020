@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-02-20 Thu 11:31 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DATABASE</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Marek L" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../styles/bigblow/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../styles/bigblow/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="../../styles/bigblow/css/hideshow.css"/>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/bigblow.js"></script>
+<script type="text/javascript" src="../../styles/bigblow/js/hideshow.js"></script>
+<script type="text/javascript" src="../../styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/session.css"/>
+<script type="text/javascript" src="assets/session.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">DATABASE</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org6fa48f5">DATABASE</a>
+<ul>
+<li><a href="#org01b904b">Start</a></li>
+<li><a href="#orga4b11bc">CREATE DATABASE</a></li>
+<li><a href="#org332652f">CREATE TABLE</a>
+<ul>
+<li><a href="#org3cf3c00">SQLite column types</a></li>
+<li><a href="#org4dca6b8">Try</a></li>
+</ul>
+</li>
+<li><a href="#orgfda90de">ALTER TABLE</a>
+<ul>
+<li><a href="#org49a901e">Add new column</a></li>
+<li><a href="#org6b4ab85">Rename table</a></li>
+</ul>
+</li>
+<li><a href="#org2a82912">DROP TABLE</a></li>
+<li><a href="#org51af0d5">INDEXES and CONSTRAINTS</a></li>
+<li><a href="#org64dfea1">Creating Library</a>
+<ul>
+<li><a href="#orgec1a470">Library diagram</a></li>
+<li><a href="#orgb8d7aaa">Library SQL definition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<a href="./../../index.html">Lunch And Learn SQL in 2020</a>
+</p>
+
+<div id="outline-container-org6fa48f5" class="outline-2">
+<h2 id="org6fa48f5">DATABASE</h2>
+<div class="outline-text-2" id="text-org6fa48f5">
+<p>
+Own castle, own rules.
+</p>
+</div>
+
+<div id="outline-container-org01b904b" class="outline-3">
+<h3 id="org01b904b">Start</h3>
+<div class="outline-text-3" id="text-org01b904b">
+<p>
+Start sqlite as as described in <a href="../../index.html#workshop-instructions">Instructions</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga4b11bc" class="outline-3">
+<h3 id="orga4b11bc">CREATE DATABASE</h3>
+<div class="outline-text-3" id="text-orga4b11bc">
+<p>
+The command <code>.open [path/file]</code> opens existing database or if the file does not exits it creates it.
+Note: all directories in the path must exists.
+</p>
+
+<p>
+Example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">.<span class="org-keyword">open</span> week_5.sqlite <span class="org-comment">-- create file(database) week_5.sqlite</span>
+</pre>
+</div>
+
+<p>
+List files in current directory
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite">.shell ls
+</pre>
+</div>
+
+<p>
+<i>(On Windows instead of <code>ls</code> we may use word <code>dir</code>. <code>.shell ls</code> become <code>.shell dir</code>)</i>
+</p>
+
+<p>
+Show tables in current database
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite">.tables
+</pre>
+</div>
+
+<p>
+Show current attached database (file)
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite">.databases
+</pre>
+</div>
+
+<p>
+To delete the SQLite database
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">.shell rm week_5.sqlite <span class="org-comment">-- delete file week_5.sqlite</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org332652f" class="outline-3">
+<h3 id="org332652f">CREATE TABLE</h3>
+<div class="outline-text-3" id="text-org332652f">
+<pre class="example">
+CREATE TABLE &lt;table name&gt;
+( columns definition )
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">CREATE</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">foo</span> (a_column);
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org3cf3c00" class="outline-4">
+<h4 id="org3cf3c00">SQLite column types</h4>
+<div class="outline-text-4" id="text-org3cf3c00">
+<p>
+In SQLite types are not important but it is good practice to
+specify them for compatibility with other RDBMS.
+</p>
+
+<ul class="org-ul">
+<li>TEXT</li>
+<li>NUMERIC</li>
+<li>INTEGER</li>
+<li>REAL</li>
+<li>BLOB</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4dca6b8" class="outline-4">
+<h4 id="org4dca6b8">Try</h4>
+<div class="outline-text-4" id="text-org4dca6b8">
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">CREATE</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">bar</span> (
+id <span class="org-type">INTEGER</span> <span class="org-keyword">PRIMARY</span> <span class="org-keyword">KEY</span>,
+title TEXT);
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">.tables
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfda90de" class="outline-3">
+<h3 id="orgfda90de">ALTER TABLE</h3>
+<div class="outline-text-3" id="text-orgfda90de">
+</div>
+<div id="outline-container-org49a901e" class="outline-4">
+<h4 id="org49a901e">Add new column</h4>
+<div class="outline-text-4" id="text-org49a901e">
+<pre class="example">
+ALTER TABLE &lt;table_name&gt; ADD COLUMN &lt;column definition&gt;;
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">ALTER</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">foo</span> <span class="org-keyword">ADD</span> <span class="org-keyword">COLUMN</span> colour TEXT;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">.<span class="org-keyword">schema</span> foo
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6b4ab85" class="outline-4">
+<h4 id="org6b4ab85">Rename table</h4>
+<div class="outline-text-4" id="text-org6b4ab85">
+<pre class="example">
+ALTER TABLE &lt;table_name&gt; RENAME TO &lt;new_table_name&gt;;
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">ALTER</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">foo</span> RENAME <span class="org-keyword">TO</span> foo2;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">.tables
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2a82912" class="outline-3">
+<h3 id="org2a82912">DROP TABLE</h3>
+<div class="outline-text-3" id="text-org2a82912">
+<p>
+Deleting table
+</p>
+
+<p>
+Syntax
+</p>
+
+<pre class="example">
+DROP TABLE &lt;table_name&gt;;
+</pre>
+
+<pre class="example">
+DROP TABLE IF EXISTS &lt;table_name&gt;;
+</pre>
+
+<p>
+Example
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">DROP</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">foo</span>;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">DROP</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">IF</span> <span class="org-keyword">EXISTS</span> foo;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org51af0d5" class="outline-3">
+<h3 id="org51af0d5">INDEXES and CONSTRAINTS</h3>
+<div class="outline-text-3" id="text-org51af0d5">
+<p>
+Helps us quickly find the data and ensure data integrity
+</p>
+
+<p>
+Syntax
+</p>
+
+<pre class="example">
+CREATE [UNIQUE] INDEX &lt;index_name&gt; ON &lt;table_name&gt; (columns)
+</pre>
+
+<p>
+The <i>UNIQUE</i> keyword causes that no new row with same values in
+columns as already existing row has will be accepted.
+</p>
+
+<p>
+Example
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">CREATE</span> <span class="org-keyword">UNIQUE</span> INDEX br_title_idx <span class="org-keyword">ON</span> bar (title);
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">INSERT</span> <span class="org-keyword">INTO</span> bar (title) <span class="org-keyword">VALUES</span> (<span class="org-string">'hello'</span>);
+<span class="org-keyword">INSERT</span> <span class="org-keyword">INTO</span> bar (title) <span class="org-keyword">VALUES</span> (<span class="org-string">'hello'</span>); <span class="org-comment">-- this will fail</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org64dfea1" class="outline-3">
+<h3 id="org64dfea1">Creating Library</h3>
+<div class="outline-text-3" id="text-org64dfea1">
+</div>
+
+<div id="outline-container-orgec1a470" class="outline-4">
+<h4 id="orgec1a470">Library diagram</h4>
+<div class="outline-text-4" id="text-orgec1a470">
+
+<div class="figure">
+<p><img src="assets/library_uml.png" alt="library_uml.png" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb8d7aaa" class="outline-4">
+<h4 id="orgb8d7aaa">Library SQL definition</h4>
+<div class="outline-text-4" id="text-orgb8d7aaa">
+<div class="org-src-container">
+<pre class="src src-sqlite">.<span class="org-keyword">open</span> library.sqlite
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">
+<span class="org-keyword">CREATE</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">books</span>(
+id <span class="org-type">INTEGER</span> <span class="org-keyword">PRIMARY</span> <span class="org-keyword">KEY</span>,
+author_id <span class="org-type">INTEGER</span>,
+title TEXT);
+
+<span class="org-keyword">CREATE</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">users</span>(
+id <span class="org-type">INTEGER</span> <span class="org-keyword">primary</span> <span class="org-keyword">key</span>,
+<span class="org-keyword">name</span> TEXT);
+
+<span class="org-keyword">CREATE</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">borrowed_books</span>(
+book_id <span class="org-type">INTEGER</span>,
+user_id <span class="org-type">INTEGER</span>,
+borrowed_at DATETIME,
+returned_at DATETIME);
+
+<span class="org-keyword">CREATE</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">authors</span>(
+id <span class="org-type">INTEGER</span> <span class="org-keyword">PRIMARY</span> <span class="org-keyword">KEY</span>,
+<span class="org-keyword">name</span> TEXT);
+
+<span class="org-comment">-- make sure we have only one author with same name in our database</span>
+<span class="org-keyword">CREATE</span> <span class="org-keyword">UNIQUE</span> INDEX author_name_idx <span class="org-keyword">ON</span> authors (<span class="org-keyword">name</span>);
+
+<span class="org-comment">-- make sure we have only one user with same name in our database</span>
+<span class="org-keyword">CREATE</span> <span class="org-keyword">UNIQUE</span> INDEX user_name_idx <span class="org-keyword">ON</span> users (<span class="org-keyword">name</span>);
+
+<span class="org-comment">-- make sure we have only one book with same title to belong to the author</span>
+<span class="org-keyword">CREATE</span> <span class="org-keyword">UNIQUE</span> INDEX book_name_author_idx <span class="org-keyword">ON</span> books (title, author_id);
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"> <span class="org-keyword">INSERT</span> <span class="org-keyword">INTO</span> authors (<span class="org-keyword">name</span>) <span class="org-keyword">VALUES</span>
+(<span class="org-string">'George Orwell'</span>),
+(<span class="org-string">'Ray Bradbury'</span>),
+(<span class="org-string">'Douglas Adams'</span>),
+(<span class="org-string">'Frank Herbert'</span>),
+(<span class="org-string">'Isaac Asimov'</span>),
+(<span class="org-string">'Aldous Huxley'</span>),
+(<span class="org-string">'Philip K. Dick'</span>),
+(<span class="org-string">'Margaret Atwood'</span>);
+
+ <span class="org-keyword">INSERT</span> <span class="org-keyword">INTO</span> books (title, author_id) <span class="org-keyword">VALUES</span>
+(<span class="org-string">'1984'</span>, 1),
+(<span class="org-string">'Fahrenheit 451'</span>, 2),
+("The Hitchhiker<span class="org-string">'s Guide to the Galaxy", 3),</span>
+<span class="org-string">('</span>Dune<span class="org-string">', 4),</span>
+<span class="org-string">('</span>The Foundation Trilogy<span class="org-string">', 5);</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> authors.<span class="org-keyword">name</span> <span class="org-keyword">AS</span> Author, books.title <span class="org-keyword">FROM</span> authors <span class="org-keyword">LEFT</span> <span class="org-keyword">JOIN</span> books <span class="org-keyword">ON</span> authors.id = books.author_id
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Marek L</p>
+<p class="date">Created: 2020-02-20 Thu 11:31</p>
+</div>
+</body>
+</html>
