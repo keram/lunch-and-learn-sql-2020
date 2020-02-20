@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-02-20 Thu 11:31 -->
+<!-- 2020-02-20 Thu 11:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>DATABASE</title>
@@ -260,28 +260,28 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org6fa48f5">DATABASE</a>
+<li><a href="#org6501be2">DATABASE</a>
 <ul>
-<li><a href="#org01b904b">Start</a></li>
-<li><a href="#orga4b11bc">CREATE DATABASE</a></li>
-<li><a href="#org332652f">CREATE TABLE</a>
+<li><a href="#org2d02ca1">Start</a></li>
+<li><a href="#org856d3cf">CREATE DATABASE</a></li>
+<li><a href="#orgc093e8a">CREATE TABLE</a>
 <ul>
-<li><a href="#org3cf3c00">SQLite column types</a></li>
-<li><a href="#org4dca6b8">Try</a></li>
+<li><a href="#org8dc34e5">SQLite column types</a></li>
+<li><a href="#orgbc64d0c">Try</a></li>
 </ul>
 </li>
-<li><a href="#orgfda90de">ALTER TABLE</a>
+<li><a href="#org3f5a18d">ALTER TABLE</a>
 <ul>
-<li><a href="#org49a901e">Add new column</a></li>
-<li><a href="#org6b4ab85">Rename table</a></li>
+<li><a href="#org7ff1838">Add new column</a></li>
+<li><a href="#org9825cd1">Rename table</a></li>
 </ul>
 </li>
-<li><a href="#org2a82912">DROP TABLE</a></li>
-<li><a href="#org51af0d5">INDEXES and CONSTRAINTS</a></li>
-<li><a href="#org64dfea1">Creating Library</a>
+<li><a href="#orgfe486f5">DROP TABLE</a></li>
+<li><a href="#orgce53a4f">INDEXES and CONSTRAINTS</a></li>
+<li><a href="#org536e957">Creating Library</a>
 <ul>
-<li><a href="#orgec1a470">Library diagram</a></li>
-<li><a href="#orgb8d7aaa">Library SQL definition</a></li>
+<li><a href="#orgac9eae9">Library diagram</a></li>
+<li><a href="#orgd7a6bb6">Library SQL definition</a></li>
 </ul>
 </li>
 </ul>
@@ -293,26 +293,26 @@ for the JavaScript code in this tag.
 <a href="./../../index.html">Lunch And Learn SQL in 2020</a>
 </p>
 
-<div id="outline-container-org6fa48f5" class="outline-2">
-<h2 id="org6fa48f5">DATABASE</h2>
-<div class="outline-text-2" id="text-org6fa48f5">
+<div id="outline-container-org6501be2" class="outline-2">
+<h2 id="org6501be2">DATABASE</h2>
+<div class="outline-text-2" id="text-org6501be2">
 <p>
 Own castle, own rules.
 </p>
 </div>
 
-<div id="outline-container-org01b904b" class="outline-3">
-<h3 id="org01b904b">Start</h3>
-<div class="outline-text-3" id="text-org01b904b">
+<div id="outline-container-org2d02ca1" class="outline-3">
+<h3 id="org2d02ca1">Start</h3>
+<div class="outline-text-3" id="text-org2d02ca1">
 <p>
 Start sqlite as as described in <a href="../../index.html#workshop-instructions">Instructions</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga4b11bc" class="outline-3">
-<h3 id="orga4b11bc">CREATE DATABASE</h3>
-<div class="outline-text-3" id="text-orga4b11bc">
+<div id="outline-container-org856d3cf" class="outline-3">
+<h3 id="org856d3cf">CREATE DATABASE</h3>
+<div class="outline-text-3" id="text-org856d3cf">
 <p>
 The command <code>.open [path/file]</code> opens existing database or if the file does not exits it creates it.
 Note: all directories in the path must exists.
@@ -366,9 +366,9 @@ To delete the SQLite database
 </div>
 </div>
 
-<div id="outline-container-org332652f" class="outline-3">
-<h3 id="org332652f">CREATE TABLE</h3>
-<div class="outline-text-3" id="text-org332652f">
+<div id="outline-container-orgc093e8a" class="outline-3">
+<h3 id="orgc093e8a">CREATE TABLE</h3>
+<div class="outline-text-3" id="text-orgc093e8a">
 <pre class="example">
 CREATE TABLE &lt;table name&gt;
 ( columns definition )
@@ -380,9 +380,9 @@ CREATE TABLE &lt;table name&gt;
 </div>
 </div>
 
-<div id="outline-container-org3cf3c00" class="outline-4">
-<h4 id="org3cf3c00">SQLite column types</h4>
-<div class="outline-text-4" id="text-org3cf3c00">
+<div id="outline-container-org8dc34e5" class="outline-4">
+<h4 id="org8dc34e5">SQLite column types</h4>
+<div class="outline-text-4" id="text-org8dc34e5">
 <p>
 In SQLite types are not important but it is good practice to
 specify them for compatibility with other RDBMS.
@@ -398,9 +398,9 @@ specify them for compatibility with other RDBMS.
 </div>
 </div>
 
-<div id="outline-container-org4dca6b8" class="outline-4">
-<h4 id="org4dca6b8">Try</h4>
-<div class="outline-text-4" id="text-org4dca6b8">
+<div id="outline-container-orgbc64d0c" class="outline-4">
+<h4 id="orgbc64d0c">Try</h4>
+<div class="outline-text-4" id="text-orgbc64d0c">
 <div class="org-src-container">
 <pre class="src src-sqlite"><span class="org-keyword">CREATE</span> <span class="org-keyword">TABLE</span> <span class="org-function-name">bar</span> (
 id <span class="org-type">INTEGER</span> <span class="org-keyword">PRIMARY</span> <span class="org-keyword">KEY</span>,
@@ -416,13 +416,13 @@ title TEXT);
 </div>
 </div>
 
-<div id="outline-container-orgfda90de" class="outline-3">
-<h3 id="orgfda90de">ALTER TABLE</h3>
-<div class="outline-text-3" id="text-orgfda90de">
+<div id="outline-container-org3f5a18d" class="outline-3">
+<h3 id="org3f5a18d">ALTER TABLE</h3>
+<div class="outline-text-3" id="text-org3f5a18d">
 </div>
-<div id="outline-container-org49a901e" class="outline-4">
-<h4 id="org49a901e">Add new column</h4>
-<div class="outline-text-4" id="text-org49a901e">
+<div id="outline-container-org7ff1838" class="outline-4">
+<h4 id="org7ff1838">Add new column</h4>
+<div class="outline-text-4" id="text-org7ff1838">
 <pre class="example">
 ALTER TABLE &lt;table_name&gt; ADD COLUMN &lt;column definition&gt;;
 </pre>
@@ -439,9 +439,9 @@ ALTER TABLE &lt;table_name&gt; ADD COLUMN &lt;column definition&gt;;
 </div>
 </div>
 
-<div id="outline-container-org6b4ab85" class="outline-4">
-<h4 id="org6b4ab85">Rename table</h4>
-<div class="outline-text-4" id="text-org6b4ab85">
+<div id="outline-container-org9825cd1" class="outline-4">
+<h4 id="org9825cd1">Rename table</h4>
+<div class="outline-text-4" id="text-org9825cd1">
 <pre class="example">
 ALTER TABLE &lt;table_name&gt; RENAME TO &lt;new_table_name&gt;;
 </pre>
@@ -459,9 +459,9 @@ ALTER TABLE &lt;table_name&gt; RENAME TO &lt;new_table_name&gt;;
 </div>
 </div>
 
-<div id="outline-container-org2a82912" class="outline-3">
-<h3 id="org2a82912">DROP TABLE</h3>
-<div class="outline-text-3" id="text-org2a82912">
+<div id="outline-container-orgfe486f5" class="outline-3">
+<h3 id="orgfe486f5">DROP TABLE</h3>
+<div class="outline-text-3" id="text-orgfe486f5">
 <p>
 Deleting table
 </p>
@@ -494,9 +494,9 @@ Example
 </div>
 </div>
 
-<div id="outline-container-org51af0d5" class="outline-3">
-<h3 id="org51af0d5">INDEXES and CONSTRAINTS</h3>
-<div class="outline-text-3" id="text-org51af0d5">
+<div id="outline-container-orgce53a4f" class="outline-3">
+<h3 id="orgce53a4f">INDEXES and CONSTRAINTS</h3>
+<div class="outline-text-3" id="text-orgce53a4f">
 <p>
 Helps us quickly find the data and ensure data integrity
 </p>
@@ -531,14 +531,14 @@ Example
 </div>
 </div>
 
-<div id="outline-container-org64dfea1" class="outline-3">
-<h3 id="org64dfea1">Creating Library</h3>
-<div class="outline-text-3" id="text-org64dfea1">
+<div id="outline-container-org536e957" class="outline-3">
+<h3 id="org536e957">Creating Library</h3>
+<div class="outline-text-3" id="text-org536e957">
 </div>
 
-<div id="outline-container-orgec1a470" class="outline-4">
-<h4 id="orgec1a470">Library diagram</h4>
-<div class="outline-text-4" id="text-orgec1a470">
+<div id="outline-container-orgac9eae9" class="outline-4">
+<h4 id="orgac9eae9">Library diagram</h4>
+<div class="outline-text-4" id="text-orgac9eae9">
 
 <div class="figure">
 <p><img src="assets/library_uml.png" alt="library_uml.png" />
@@ -548,9 +548,9 @@ Example
 </div>
 
 
-<div id="outline-container-orgb8d7aaa" class="outline-4">
-<h4 id="orgb8d7aaa">Library SQL definition</h4>
-<div class="outline-text-4" id="text-orgb8d7aaa">
+<div id="outline-container-orgd7a6bb6" class="outline-4">
+<h4 id="orgd7a6bb6">Library SQL definition</h4>
+<div class="outline-text-4" id="text-orgd7a6bb6">
 <div class="org-src-container">
 <pre class="src src-sqlite">.<span class="org-keyword">open</span> library.sqlite
 </pre>
@@ -589,6 +589,10 @@ id <span class="org-type">INTEGER</span> <span class="org-keyword">PRIMARY</span
 </pre>
 </div>
 
+<p>
+Adding some data
+</p>
+
 <div class="org-src-container">
 <pre class="src src-sqlite"> <span class="org-keyword">INSERT</span> <span class="org-keyword">INTO</span> authors (<span class="org-keyword">name</span>) <span class="org-keyword">VALUES</span>
 (<span class="org-string">'George Orwell'</span>),
@@ -606,11 +610,18 @@ id <span class="org-type">INTEGER</span> <span class="org-keyword">PRIMARY</span
 ("The Hitchhiker<span class="org-string">'s Guide to the Galaxy", 3),</span>
 <span class="org-string">('</span>Dune<span class="org-string">', 4),</span>
 <span class="org-string">('</span>The Foundation Trilogy<span class="org-string">', 5);</span>
+
+<span class="org-string"> INSERT INTO books (title, author_id) VALUES</span>
+<span class="org-string">('</span>The Naked Sun<span class="org-string">', 5);</span>
 </pre>
 </div>
 
+<p>
+Get authors and their books in our library
+</p>
 <div class="org-src-container">
-<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> authors.<span class="org-keyword">name</span> <span class="org-keyword">AS</span> Author, books.title <span class="org-keyword">FROM</span> authors <span class="org-keyword">LEFT</span> <span class="org-keyword">JOIN</span> books <span class="org-keyword">ON</span> authors.id = books.author_id
+<pre class="src src-sqlite"><span class="org-keyword">SELECT</span> authors.<span class="org-keyword">name</span> <span class="org-keyword">AS</span> Author, books.title
+<span class="org-keyword">FROM</span> authors <span class="org-keyword">LEFT</span> <span class="org-keyword">JOIN</span> books <span class="org-keyword">ON</span> authors.id = books.author_id
 </pre>
 </div>
 </div>
@@ -620,7 +631,7 @@ id <span class="org-type">INTEGER</span> <span class="org-keyword">PRIMARY</span
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marek L</p>
-<p class="date">Created: 2020-02-20 Thu 11:31</p>
+<p class="date">Created: 2020-02-20 Thu 11:45</p>
 </div>
 </body>
 </html>

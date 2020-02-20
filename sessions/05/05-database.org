@@ -331,14 +331,15 @@ Adding some data
 ('The Foundation Trilogy', 5);
 
  INSERT INTO books (title, author_id) VALUES
-('The Naked Sun, 5);
+('The Naked Sun', 5);
 #+end_src
 
 #+RESULTS:
 
 Get authors and their books in our library
 #+begin_src sqlite
-SELECT authors.name AS Author, books.title FROM authors LEFT JOIN books ON authors.id = books.author_id
+SELECT authors.name AS Author, books.title
+FROM authors LEFT JOIN books ON authors.id = books.author_id
 #+end_src
 
 
@@ -350,6 +351,7 @@ SELECT authors.name AS Author, books.title FROM authors LEFT JOIN books ON autho
 | Douglas Adams   | The Hitchhiker's Guide to the Galaxy |
 | Frank Herbert   | Dune                                 |
 | Isaac Asimov    | The Foundation Trilogy               |
+| Isaac Asimov    | The Naked Sun                        |
 | Aldous Huxley   |                                      |
 | Philip K. Dick  |                                      |
 | Margaret Atwood |                                      |
