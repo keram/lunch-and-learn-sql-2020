@@ -61,4 +61,9 @@
 |  coll IS NOT NULL  |                                        |
 +--------------------+----------------------------------------+
 
-** SQL Datatypes
+
+** SQL
+
+| --    | Single line comment (Anything after -- is ignored)     |
+| ~/* */~ | Multi line comment. Anything between ~/* */~ is ignored) |
+|       |                                                        |
