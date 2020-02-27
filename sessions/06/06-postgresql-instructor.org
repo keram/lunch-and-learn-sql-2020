@@ -6,7 +6,7 @@
 #+PROPERTY: header-args:sql+ :session lunch-and-learn-sql-2020
 #+PROPERTY: header-args:sql+ :database lls2020
 # #+PROPERTY: header-args:sql+ :cmdline
-# #+PROPERTY: header-args:sql+ :cmdline options="--search_path=week6,public"
+#+PROPERTY: header-args:sql+ :cmdline options="--search_path=lls2020.week6,public"
 
 
 #+begin_src sql
@@ -14,9 +14,10 @@ SHOW search_path;
 #+end_src
 
 #+RESULTS:
-| search_path  |
-|--------------|
-| week6,public |
+| search_path     |
+|-----------------|
+| "$user", public |
+
 
 
 psql --set="ON_ERROR_STOP=1"  -A -P footer=off -F "	"  -hlocalhost -Upostgres -dlls2020 -f "c:/Users/marek/AppData/Local/Temp/babel-LBoFsN/sql-in-4GOUnI" options="--search_path=week6,public"
@@ -25,13 +26,17 @@ create database
 CREATE DATABASE lls2020;
 #+end_src
 
+#+RESULTS:
+|   |
+
 create schema
 #+begin_src sql
 CREATE SCHEMA week6;
 #+end_src
 
 #+RESULTS:
-|   |
+| CREATE SCHEMA |
+|---------------|
 list available extensions
 #+begin_src sql
 SELECT * FROM pg_available_extensions;
@@ -43,7 +48,7 @@ SELECT CURRENT_DATABASE();
 #+RESULTS:
 | current_database |
 |------------------|
-| postgres         |
+| lls2020          |
 
 
 --

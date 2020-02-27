@@ -1,4 +1,4 @@
-#+TITLE: DATABASE
+#+TITLE: PostgreSQL
 #+SETUPFILE: ../../theme-bigblow-local.setup
 #+OPTIONS: num:nil
 #+OPTIONS: ^:nil
@@ -8,72 +8,19 @@
 
 [[./../../index.org][Lunch And Learn SQL in 2020]]
 
-* DATABASE
+* PostgreSQL
 
-  Own castle, own rules.
+** DATABASE
 
-** Start
-
-   Start sqlite as as described in [[../../index.html#workshop-instructions][Instructions]]
-
-** CREATE DATABASE
-
-**
-
-   # In SQLite it is very simple.
-   The command ~.open [path/file]~ opens existing database or if the file does not exits it creates it.
-   Note: all directories in the path must exists.
-
-   Example:
-
-   #+begin_src sqlite
-   .open week_5.sqlite -- create file(database) week_5.sqlite
-   #+end_src
-
-   #+RESULTS:
-
-   List files in current directory
-   #+begin_src sqlite
-   .shell ls
-   #+end_src
-
-   #+RESULTS:
-   | week_5.sqlite |
-   |---------------|
-
-   /(On Windows instead of ~ls~ we may use word ~dir~. ~.shell ls~ become ~.shell dir~)/
-
-   Show tables in current database
-   #+begin_src sqlite
-   .tables
-   #+end_src
-
-   #+RESULTS:
-
-   Show current attached database (file)
-   #+begin_src sqlite
-   .databases
-   #+end_src
-
-   #+RESULTS:
-   | main: c:\Users\marek\work\sql\lunch-and-learn-sql-2020\sessions\05\db\week_5.sqlite |
-   |-------------------------------------------------------------------------------------|
-
-   To delete the SQLite database
-
-   #+begin_src sqlite
-   .shell rm week_5.sqlite -- delete file week_5.sqlite
-   #+end_src
-
-** schema
+** SCHEMA
 
 There are several reasons why one might want to use schemas:
 
-* To allow many users to use one database without interfering with each other.
+-  To allow many users to use one database without interfering with each other.
 
-* To organize database objects into logical groups to make them more manageable.
+- To organize database objects into logical groups to make them more manageable.
 
-* Third-party applications can be put into separate schemas so they do not collide with the names of other
+- Third-party applications can be put into separate schemas so they do not collide with the names of other
  objects.
 
 Schemas are analogous to directories at the operating system level, except that schemas cannot be nested.
@@ -89,300 +36,99 @@ DROP SCHEMA myschema;
 
 To drop a schema including all contained objects, use:
 
-
 DROP SCHEMA myschema CASCADE;
 
 created tables without specifying any schema names. By default such tables (and
 other objects) are automatically put into a schema named “public”.
-** CREATE TABLE
 
-   #+begin_example
-   CREATE TABLE <table name>
-   ( columns definition )
-   #+end_example
+search path
 
-   #+begin_src sqlite :results output silent
-   CREATE TABLE foo (a_column);
-   #+end_src
+SHOW search_path;
 
-*** SQLite column types
 
-    In SQLite types are not important but it is good practice to
-    specify them for compatibility with other RDBMS.
+** TABLE
 
-    - TEXT
-    - NUMERIC
-    - INTEGER
-    - REAL
-    - BLOB
+*** CREATE TABLE
+     #+begin_src sqlite
+       CREATE TABLE bar (
+        id INTEGER PRIMARY KEY,
+        title TEXT);
+     #+end_src
 
-*** Try
+     #+RESULTS:
 
-    #+begin_src sqlite
-    CREATE TABLE bar (
-    id INTEGER PRIMARY KEY,
-    title TEXT);
-    #+end_src
+*** ALTER TABLE
 
-    #+RESULTS:
+**** Add new column
 
-    #+begin_src sqlite
-    .tables
-    #+end_src
+     #+begin_example
+     ALTER TABLE <table_name> ADD COLUMN <column definition>;
+     #+end_example
 
-    #+RESULTS:
-    | bar   foo2 |
-    |------------|
+     #+begin_src sqlite :results output silent
+     ALTER TABLE foo ADD COLUMN colour TEXT;
+     #+end_src
 
-** ALTER TABLE
+     #+RESULTS:
 
-*** Add new column
+     #+begin_src sqlite
+     .schema foo
+     #+end_src
+
+     #+RESULTS:
+     | CREATE TABLE foo (a_column | colour TEXT); |
+     |----------------------------+---------------|
+
+**** Rename table
+
+     #+begin_example
+     ALTER TABLE <table_name> RENAME TO <new_table_name>;
+     #+end_example
+
+     #+begin_src sqlite :results output silent
+     ALTER TABLE foo RENAME TO foo2;
+     #+end_src
+
+     #+begin_src sqlite
+     .tables
+     #+end_src
+
+     #+RESULTS:
+     | foo2 |
+     |------|
+
+*** DROP TABLE
+
+    Deleting table
+
+    Syntax
 
     #+begin_example
-    ALTER TABLE <table_name> ADD COLUMN <column definition>;
+    DROP TABLE <table_name>;
     #+end_example
-
-    #+begin_src sqlite :results output silent
-    ALTER TABLE foo ADD COLUMN colour TEXT;
-    #+end_src
-
-    #+RESULTS:
-
-    #+begin_src sqlite
-    .schema foo
-    #+end_src
-
-    #+RESULTS:
-    | CREATE TABLE foo (a_column | colour TEXT); |
-    |----------------------------+---------------|
-
-*** Rename table
 
     #+begin_example
-    ALTER TABLE <table_name> RENAME TO <new_table_name>;
+    DROP TABLE IF EXISTS <table_name>;
     #+end_example
 
-    #+begin_src sqlite :results output silent
-    ALTER TABLE foo RENAME TO foo2;
-    #+end_src
+    Example
 
     #+begin_src sqlite
-    .tables
+    DROP TABLE foo;
     #+end_src
 
-    #+RESULTS:
-    | foo2 |
-    |------|
+    #+begin_src sqlite :results output silent
+    DROP TABLE IF EXISTS foo;
+    #+end_src
 
-** DROP TABLE
-
-   Deleting table
-
-   Syntax
-
-   #+begin_example
-   DROP TABLE <table_name>;
-   #+end_example
-
-   #+begin_example
-   DROP TABLE IF EXISTS <table_name>;
-   #+end_example
-
-   Example
-
-   #+begin_src sqlite
-   DROP TABLE foo;
-   #+end_src
-
-   #+begin_src sqlite :results output silent
-   DROP TABLE IF EXISTS foo;
-   #+end_src
 
 ** INDEXES and CONSTRAINTS
-
-   Helps us quickly find the data and ensure data integrity
-
-   Syntax
-
-   #+begin_example
-   CREATE [UNIQUE] INDEX <index_name> ON <table_name> (columns)
-   #+end_example
-
-   The /UNIQUE/ keyword causes that no new row with same values in
-   columns as already existing row has will be accepted.
-
-   Example
 
    #+begin_src sqlite :results output silent
    CREATE UNIQUE INDEX br_title_idx ON bar (title);
    #+end_src
 
-   #+begin_src sqlite
-   INSERT INTO bar (title) VALUES ('hello');
-   INSERT INTO bar (title) VALUES ('hello'); -- this will fail
-   #+end_src
-
-** Creating Library
-   #+PROPERTY: header-args:sqlite :db library.sqlite :dir db/ :colnames yes :exports code
-
-*** Library diagram
-
-   #+begin_src plantuml :file assets/library_uml.png :exports results
-@startuml
-
-entity Book {
-  * id
-  --
-  * title
-}
-
-entity Author {
-  * id
-  --
-  * name
-}
-
-
-entity User {
-  * id
-  --
-  * name
-}
-
-entity BorrowedBook {
---
-  * borrowed_at
-  returned_at
-}
-
-Author }o-- Book
-User }o-- BorrowedBook
-BorrowedBook }o-- Book
-
-@enduml
-   #+end_src
-
-   #+RESULTS:
-   [[file:assets/library_uml.png]]
-
-
-*** Library SQL definition
-
-   #+begin_src sqlite :results output silent
-   .open library.sqlite
-   #+end_src
-
-   #+begin_src sqlite :exports none :results output silent
-  -- making sure we have clear database to play with
-   DROP TABLE IF EXISTS books;
-   DROP TABLE IF EXISTS users;
-   DROP TABLE IF EXISTS borrowed_books;
-   DROP TABLE IF EXISTS authors;
-   #+end_src
-
-   #+RESULTS:
-
-   #+begin_src sqlite
-
-   CREATE TABLE books(
-   id INTEGER PRIMARY KEY,
-   author_id INTEGER,
-   title TEXT);
-
-   CREATE TABLE users(
-   id INTEGER primary key,
-   name TEXT);
-
-   CREATE TABLE borrowed_books(
-   book_id INTEGER,
-   user_id INTEGER,
-   borrowed_at DATETIME,
-   returned_at DATETIME);
-
-   CREATE TABLE authors(
-   id INTEGER PRIMARY KEY,
-   name TEXT);
-
-   -- make sure we have only one author with same name in our database
-   CREATE UNIQUE INDEX author_name_idx ON authors (name);
-
-   -- make sure we have only one user with same name in our database
-   CREATE UNIQUE INDEX user_name_idx ON users (name);
-
-   -- make sure we have only one book with same title to belong to the author
-   CREATE UNIQUE INDEX book_name_author_idx ON books (title, author_id);
-
-   #+end_src
-
-   #+RESULTS:
-
-   #+begin_src sqlite :exports none
-  .schema
-   #+end_src
-
-   #+RESULTS:
-   | CREATE TABLE books(                                      |             |
-   |----------------------------------------------------------+-------------|
-   | id INTEGER PRIMARY KEY                                   |             |
-   | author_id INTEGER                                        |             |
-   | title TEXT);                                             |             |
-   | CREATE TABLE users(                                      |             |
-   | id INTEGER primary key                                   |             |
-   | name TEXT);                                              |             |
-   | CREATE TABLE borrowed_books(                             |             |
-   | book_id INTEGER                                          |             |
-   | user_id INTEGER                                          |             |
-   | borrowed_at DATETIME                                     |             |
-   | returned_at DATETIME);                                   |             |
-   | CREATE TABLE authors(                                    |             |
-   | id INTEGER PRIMARY KEY                                   |             |
-   | name TEXT);                                              |             |
-   | CREATE UNIQUE INDEX author_name_idx ON authors (name);   |             |
-   | CREATE UNIQUE INDEX user_name_idx ON users (name);       |             |
-   | CREATE UNIQUE INDEX book_name_author_idx ON books (title | author_id); |
-
-Adding some data
-
-#+begin_src sqlite
- INSERT INTO authors (name) VALUES
-('George Orwell'),
-('Ray Bradbury'),
-('Douglas Adams'),
-('Frank Herbert'),
-('Isaac Asimov'),
-('Aldous Huxley'),
-('Philip K. Dick'),
-('Margaret Atwood');
-
- INSERT INTO books (title, author_id) VALUES
-('1984', 1),
-('Fahrenheit 451', 2),
-("The Hitchhiker's Guide to the Galaxy", 3),
-('Dune', 4),
-('The Foundation Trilogy', 5);
-
- INSERT INTO books (title, author_id) VALUES
-('The Naked Sun', 5);
-#+end_src
-
-#+RESULTS:
-
-Get authors and their books in our library
-#+begin_src sqlite
-SELECT authors.name AS Author, books.title
-FROM authors LEFT JOIN books ON authors.id = books.author_id
-#+end_src
-
-
-#+RESULTS:
-| Author          | title                                |
-|-----------------+--------------------------------------|
-| George Orwell   | 1984                                 |
-| Ray Bradbury    | Fahrenheit 451                       |
-| Douglas Adams   | The Hitchhiker's Guide to the Galaxy |
-| Frank Herbert   | Dune                                 |
-| Isaac Asimov    | The Foundation Trilogy               |
-| Isaac Asimov    | The Naked Sun                        |
-| Aldous Huxley   |                                      |
-| Philip K. Dick  |                                      |
-| Margaret Atwood |                                      |
+** INSERT
+** UPDATE
+** DELETE
+** SELECT
