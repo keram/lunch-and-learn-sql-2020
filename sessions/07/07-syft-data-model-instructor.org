@@ -1,6 +1,181 @@
 * SQLite
-  #+PROPERTY: header-args:sqlite :db week_5.sqlite :dir db/
+  #+PROPERTY: header-args:sqlite :db week7.sqlite :dir db/
 
   #+begin_src sqlite
-  .open week_5.sqlite -- create file(database) week_5.sqlite
+  .open week7.sqlite
   #+end_src
+
+* PostgreSQL
+#+PROPERTY: header-args:sql :engine postgresql
+#+PROPERTY: header-args:sql+ :dbhost localhost :dbuser postgres
+#+PROPERTY: header-args:sql+ :session lunch-and-learn-sql-2020
+#+PROPERTY: header-args:sql+ :database lls2020
+# #+PROPERTY: header-args:sql+ :cmdline
+#+PROPERTY: header-args:sql+ :cmdline options="--search_path=lls2020.week6,public"
+
+
+#+begin_src sql
+SHOW search_path;
+#+end_src
+
+#+RESULTS:
+|   |
+
+
+
+# psql --set="ON_ERROR_STOP=1"  -A -P footer=off -F "	"  -hlocalhost -Upostgres -dlls2020 -f "c:/Users/marek/AppData/Local/Temp/babel-LBoFsN/sql-in-4GOUnI" options="--search_path=week6,public"
+#+begin_src sql
+CREATE DATABASE lls2020;
+#+end_src
+
+#+RESULTS:
+|   |
+
+create schema
+#+begin_src sql
+CREATE SCHEMA week6;
+#+end_src
+
+#+RESULTS:
+| CREATE SCHEMA |
+|---------------|
+list available extensions
+#+begin_src sql
+SELECT * FROM pg_available_extensions;
+#+end_src
+#+begin_src sql
+SELECT CURRENT_DATABASE();
+#+end_src
+
+#+RESULTS:
+| current_database |
+|------------------|
+| lls2020          |
+
+
+--
+
+-- use schema week6;
+-- CREATE TABLE customer (
+--     id integer NOT NULL,
+--     name text NOT NULL,
+--     address text
+-- );
+
+#+end_src
+
+#+RESULTS:
+| CREATE DATABASE |
+|-----------------|
+#+begin_src sql
+select count(*) from pg_tables;
+#+end_src
+
+#+RESULTS:
+| count |
+|-------|
+|    70 |
+
+
+convert string of ids delimter by , to rows
+#+begin_src sql
+SELECT unnest(string_to_array('2,4,6a', ',')) AS ids;
+#+end_src
+
+#+RESULTS:
+| ids |
+|-----|
+|   2 |
+|   4 |
+|  6a |
+
+# date format: month/day/year
+#+begin_src sql
+select * from generate_series('1/1/2020', '7/1/2020', interval '1 month');
+#+end_src
+
+#+RESULTS:
+| generate_series        |
+|------------------------|
+| 2020-01-01 00:00:00+00 |
+| 2020-02-01 00:00:00+00 |
+| 2020-03-01 00:00:00+00 |
+| 2020-04-01 00:00:00+01 |
+| 2020-05-01 00:00:00+01 |
+| 2020-06-01 00:00:00+01 |
+| 2020-07-01 00:00:00+01 |
+#+begin_src sql
+-- show tables;
+show schema;
+#+end_src
+
+#+RESULTS:
+|   |
+
+#+RESULTS:
+| search_path     |
+|-----------------|
+| "$user", public |
+
+#+begin_src sql
+-- SET search_path TO week6;
+SHOW search_path;
+#+end_src
+
+#+RESULTS:
+| search_path     |
+|-----------------|
+| "$user", public |
+
+
+list schemas in db
+#+begin_src sql
+select schema_name
+from information_schema.schemata;
+#+end_src
+
+#+RESULTS:
+| schema_name        |
+|--------------------|
+| pg_toast           |
+| pg_temp_1          |
+| pg_toast_temp_1    |
+| pg_catalog         |
+| public             |
+| information_schema |
+| week6              |
+
+#+begin_src sql :results silent :prologue "SET search_path TO week6;" :epilogue "SET search_path TO week6;"
+DROP TABLE IF EXISTS my_first_table;
+DROP TABLE IF EXISTS my_first_table2;
+
+CREATE TABLE my_first_table2 (
+    first_column text,
+    second_column integer
+);
+#+end_src
+
+#+begin_src sql :prologue "SET search_path TO week6;" :epilogue "select 2;"
+select 1233;
+#+end_src
+
+#+RESULTS:
+| ?column? |
+|----------|
+|     1233 |
+
+#+begin_src sql
+show table;
+#+end_src
+
+#+RESULTS:
+|   |
+#+begin_src sql
+select *
+from information_schema.tables where table_schema = 'week6';
+#+end_src
+
+#+RESULTS:
+| table_catalog | table_schema | table_name     | table_type | self_referencing_column_name | reference_generation | user_defined_type_catalog | user_defined_type_schema | user_defined_type_name | is_insertable_into | is_typed | commit_action |
+|---------------+--------------+----------------+------------+------------------------------+----------------------+---------------------------+--------------------------+------------------------+--------------------+----------+---------------|
+| postgres      | week6        | my_first_table | BASE TABLE |                              |                      |                           |                          |                        | YES                | NO       |               |
