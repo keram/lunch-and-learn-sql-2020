@@ -1,0 +1,15 @@
+#+TITLE: DATABASE
+#+SETUPFILE: ../../theme-bigblow-local.setup
+#+OPTIONS: num:nil
+#+OPTIONS: ^:nil
+#+PROPERTY: header-args:sqlite :db week_5.sqlite :dir db/ :colnames yes :exports code
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/session.css"/>
+#+HTML_HEAD: <script type="text/javascript" src="assets/session.js"></script>
+
+[[./../../index.org][Lunch And Learn SQL in 2020]]
+
+* Syft Data Model
+
+  Own castle, own rules.
+
+** Start
